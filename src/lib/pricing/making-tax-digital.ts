@@ -1,8 +1,9 @@
 import type { LineItem, PricingApproval } from "./types";
 
 /**
- * MTD calculator — recovered verbatim from the live site (/mtd-calculator,
- * chunk page-35789cbad2e50a47.js, captured 21 Nov 2026).
+ * MTD calculator — ported from the original source
+ * (reckonwell-main/src/app/mtd-calculator/page.tsx, `calcMTDPrice`),
+ * live at reckonwell.com/mtd-calculator.
  */
 export const MTD_APPROVAL: PricingApproval = "recovered-unapproved";
 

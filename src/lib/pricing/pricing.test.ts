@@ -6,6 +6,11 @@ import {
   calculateMtdMonthly,
   emptyInstantQuoteInput,
   quoteReference,
+  calculateSelfAssessmentMonthly,
+  calculateRdClaimFee,
+  trueEmploymentCost,
+  ASSUMED_SALARIES,
+  HIRING_BENCHMARKS,
 } from "./index";
 
 describe("Instant Quote (recovered rules)", () => {
@@ -127,5 +132,49 @@ describe("Outsource vs hire comparison (recovered rules)", () => {
     expect(r.corpTaxFee).toBe(750);
     expect(r.hiringAnnual).toBe(34_650);
     expect(r.annualSavings).toBe(34_650 - 12 * 280);
+  });
+});
+
+describe("Self Assessment (original source rules)", () => {
+  const base = { income: 30_000, hasRental: false, monitoring: "annual" as const, transactions: "low" as const };
+  it("starts at £80/month — the published 'From £80/month'", () => {
+    expect(calculateSelfAssessmentMonthly(base).monthly).toBe(80);
+  });
+  it("adds quarterly estimates and MTD over £50k on annual filing", () => {
+    expect(calculateSelfAssessmentMonthly({ ...base, income: 60_000 }).monthly).toBe(150 + 50 + 75);
+  });
+  it("prices monthly monitoring for high earners", () => {
+    // base 250 → ×1.2 = 300; +75 planning +75 MTD
+    expect(
+      calculateSelfAssessmentMonthly({ ...base, income: 120_000, monitoring: "monthly", transactions: "medium" }).monthly,
+    ).toBe(450);
+  });
+  it("lifts the base to £150 for rental income", () => {
+    expect(calculateSelfAssessmentMonthly({ ...base, hasRental: true }).monthly).toBe(150);
+  });
+});
+
+describe("R&D claim fee (original source rules)", () => {
+  it("gives the published 'From £850 one-off' for a first claim", () => {
+    const r = calculateRdClaimFee({ rdSpend: 100_000, hasPatents: false, firstTime: true, ongoing: false });
+    expect(r.fee).toBe(850);
+  });
+  it("applies the top band with patents and a first-time discount", () => {
+    const r = calculateRdClaimFee({ rdSpend: 600_000, hasPatents: true, firstTime: true, ongoing: false });
+    expect(r.fee).toBe(2000 + 500 - 300);
+  });
+  it("returns a retainer range, which must not be quoted as a fixed price", () => {
+    const r = calculateRdClaimFee({ rdSpend: 0, hasPatents: true, firstTime: false, ongoing: true });
+    expect(r.isRange).toBe(true);
+    if (r.isRange) {
+      expect([r.feeMin, r.feeMax, r.setupFee]).toEqual([500, 700, 300]);
+    }
+  });
+});
+
+describe("Hiring benchmarks", () => {
+  it("reproduces the original derivation of the true employment cost", () => {
+    expect(trueEmploymentCost(ASSUMED_SALARIES.bookkeeper)).toBe(HIRING_BENCHMARKS.bookkeeper.annual);
+    expect(trueEmploymentCost(ASSUMED_SALARIES.financeManager)).toBe(HIRING_BENCHMARKS.financeManager.annual);
   });
 });

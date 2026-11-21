@@ -1,13 +1,13 @@
 import type { LineItem, PricingApproval } from "./types";
 
 /**
- * Final Accounts & CT600 calculator — monthly pricing recovered verbatim from
- * the live site (/final-accounts-ct600-calculator, chunk
- * page-496d25bfa2de59c2.js, captured 21 Nov 2026).
+ * Final Accounts & CT600 calculator — ported from the original source
+ * (reckonwell-main/src/app/final-accounts-ct600-calculator/page.tsx,
+ * `calcCT600Price`), live at reckonwell.com/final-accounts-ct600-calculator.
  *
  * NOTE: this conflicts with the one-off Final Accounts price in the Instant
  * Quote (£500 / £750 / £1,000). Reckonwell must confirm which model applies.
- * See docs/website-audit.md §7.6.
+ * See docs/pricing-rules.md §8.
  */
 export const CT600_APPROVAL: PricingApproval = "recovered-unapproved";
 

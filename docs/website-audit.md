@@ -3,6 +3,7 @@
 **Audited:** 21 November 2026
 **Method:** I fetched the public pages and their compiled JavaScript bundles over HTTPS, read the CSS, took screenshots, and checked DNS records. Nothing on the production site was changed.
 **Raw evidence:** the prettified bundles are not committed; you can re-fetch them from the chunk URLs quoted below.
+**Update (21 Nov 2026, later):** Reckonwell supplied the original source code (`reckonwell-main`, files dated 5 October 2026, matching the live site). Pricing is now taken from that source; the complete rulebook is in [`pricing-rules.md`](./pricing-rules.md). The sections below have been updated where the source answered an open question.
 
 ---
 
@@ -12,10 +13,10 @@
 | --- | --- |
 | Does `reckonwellnew` contain a website? | **No.** The repository was empty, with no commits. Stage 1 sets up a new Next.js app (see `project-plan.md`). |
 | What is the live site built with? | Next.js (App Router) generated with **Rocket.new**, with Rocket analytics (`static.rocket.new`). Tailwind CSS. |
-| Is the original source code available? | **No.** There is no repository access. Only the **compiled client bundles** are public, and source maps return `403`. |
-| Can the calculator pricing be recovered? | **Yes, for four calculators.** Their pricing runs in the browser, so I recovered the exact rules from the bundles. The ports were verified against the original functions with 60,000 randomised inputs (§7). |
-| Can the server integrations be recovered? | **No.** Leads, bookings and partner forms POST to `/api/calculator-lead`, `/api/notify` and `/api/referral-apply`. The server code, email templates and lead storage for those routes are not public (§9). |
-| Does the live booking system have availability? | **No.** Visitors pick any future date and type a time. The site then sends a notification. There is no slot checking, no calendar event and no invite (§8). |
+| Is the original source code available? | **Yes, as of the update.** It was supplied as `reckonwell-main` (Next.js 15, generated with Rocket.new). It is **not** committed to this repository. |
+| Can the calculator pricing be recovered? | **Yes, all six fee calculators.** That covers the four found in the bundles plus the Self Assessment and R&D fee calculators, which are live but not in the sitemap. Every port is identical to the original source function (§7, [`pricing-rules.md`](./pricing-rules.md)). |
+| What do the server integrations do? | All forms send email through **Brevo** from vadim.s@reckonwell.com. Nothing is stored in a database, no PDF is generated, and prices are not recalculated on the server (§9). |
+| Does the live booking system have availability? | **No.** Visitors pick any future date and type a time, and only Reckonwell is notified. The source contains an unused Google Calendar slots and booking API whose credentials were never configured (§8). |
 
 ---
 
@@ -117,6 +118,8 @@ Until confirmed, the shared component (`src/components/trust/TrustStrip.tsx`) ke
 
 ## 7. Calculators and pricing
 
+> **Superseded by [`pricing-rules.md`](./pricing-rules.md)**, which is built from the original source and adds the Self Assessment and R&D fee calculators. The original source confirmed every rule below; the only addition to the Instant Quote is a 5% R&D success fee note. Of the conflicts in §7.6, #3 is explained (the R&D fee calculator gives "From £850"), #6 is explained (the Self Assessment calculator gives "From £80"), and three new ones were found (MTD "From £34", payroll "From £40/employee", fractional finance "From £200"). See `pricing-rules.md` §8 for the current list.
+
 All four calculators below compute prices **in the browser**, so I recovered their rules from the compiled bundles. They have been ported to typed functions in `src/lib/pricing/`, with unit tests (`pricing.test.ts`). I also compared my ports with the original minified functions: **20,000 random inputs each** for the Instant Quote, CT600 and comparison calculators, plus **all 24 possible MTD input combinations**. **All outputs matched exactly.**
 
 Every rule set is flagged `recovered-unapproved` in code. These are the prices the live site shows today, but §7.6 lists conflicts that need a decision before any quotation is sent automatically.
@@ -196,18 +199,22 @@ Chunk: `app/book/page-c00b8e8716412c25.js`
 
 This means the brief's booking requirements (availability, calendar booking, invites) are **new functionality**, not a migration.
 
+**From the original source:** `/api/notify` emails Reckonwell only; the customer gets **no confirmation**. The source also has an **unused** `/api/calendar/slots` and `/api/calendar/book`. They use Google Calendar free/busy plus event creation, with 30-minute slots Mon–Fri 9:00–17:00 and attendee invites. The page never calls them and the Google OAuth credentials are placeholders. Note that their slot times use UTC as UK time, so they would be an hour out during British Summer Time. If Vadim uses Google Calendar, this approach can be revived properly in Stage 7.
+
 ---
 
 ## 9. Integrations and items that need the original source or account access
 
 | Item | What is known | What is needed |
 | --- | --- | --- |
-| `/api/calculator-lead` | Receives every calculator and contact submission (payloads documented in the bundles) | Where leads go (email, CRM, database?) and any templates |
-| `/api/notify` | Receives booking submissions | Whether a customer confirmation is sent, and to whom |
-| `/api/referral-apply` | Partner applications (first/last name, email, phone, role, …) | Destination and follow-up process |
-| Email provider | DNS shows **Brevo** domain verification; mail is hosted at **IONOS** (`mx00/mx01.ionos.co.uk`); SPF includes IONOS only | Confirm the provider; Resend needs DNS records added at IONOS |
-| Analytics | Rocket analytics script; custom events (`calculator_opened`, `form_submitted`, …) | Whether GA4 or Search Console exist; access for Stage 8 |
-| Calendar | Not integrated | Which calendar Vadim uses (IONOS, Google, Outlook), so invites land in it |
+| `/api/calculator-lead` | ✅ From source: Brevo emails to Vadim ("New Quotation Lead") and to the customer ("Your Reckonwell Quotation") with a `/book` link. No storage, no PDF, no server-side recalculation. | — |
+| `/api/notify` | ✅ From source: booking and callback notifications to Vadim; callback requests also send a customer confirmation; **bookings do not** | — |
+| `/api/referral-apply` | ✅ From source: confirmation to the applicant, notification to Vadim, applicant added to **Brevo contacts** | Is the Brevo contact list still used? |
+| Email provider | ✅ **Brevo** (transactional API); mail is hosted at **IONOS** | Keep Brevo, or move to Resend as the brief suggests? Either needs DNS at IONOS |
+| Analytics | Google Analytics (a measurement ID is set) plus Rocket analytics; custom events (`calculator_opened`, `form_submitted`, …) | Access to GA4 and Search Console for Stage 8 |
+| Calendar | Google Calendar API code exists but is not configured or used | Which calendar Vadim uses |
+| Tally | Three contact sections (`FinalCTASection`, `ClosingSection`, `GetStartedSection`) submit **from the browser** to the Tally API (form `eqYAj0`) using `NEXT_PUBLIC_TALLY_API_KEY`. ⚠ **That API key is therefore public** in the site's JavaScript. | Rotate the Tally key; the new site sends all forms through its own server |
+| Supabase | Keys are set in `.env`, but no code uses them | Can it be retired? |
 | Legal pages | Present on the live site | Confirm they can be copied over unchanged |
 
 ---

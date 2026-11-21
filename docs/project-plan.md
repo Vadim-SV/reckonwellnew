@@ -3,7 +3,7 @@
 **Repository:** `vadim-sv/reckonwellnew` · **Development branch:** `claude/intelligent-faraday-kb2332`
 **Status:** Stage 1 complete (21 November 2026). Nothing has been deployed, and the production site is untouched.
 
-Related documents: [`website-audit.md`](./website-audit.md) · [`design-system.md`](./design-system.md) · [`stages/`](./stages/)
+Related documents: [`website-audit.md`](./website-audit.md) · [`pricing-rules.md`](./pricing-rules.md) · [`design-system.md`](./design-system.md) · [`stages/`](./stages/)
 
 ---
 
@@ -178,19 +178,20 @@ I'll check this against Search Console data before launch.
 
 | # | Needed for | Question |
 | --- | --- | --- |
-| 1 | Stage 6 | **Approve the pricing rulebook** and resolve the six conflicts in `website-audit.md` §7.6. In particular: is Final Accounts one-off or monthly, and is payroll £3, £6 or £40 per employee? |
+| 1 | Stage 6 | **Approve the pricing rulebook** in [`pricing-rules.md`](./pricing-rules.md) and resolve the nine conflicts in §8. In particular: is Final Accounts one-off or monthly; is payroll £3, £6 or £40 per employee; and does MTD start at £34 or £100? |
 | 2 | Stage 6 | Are prices shown **excluding VAT**? Is Reckonwell VAT-registered? |
 | 3 | Stage 4 | **Founder's Launch Offer:** what is included, and the price (or "price on request")? |
 | 4 | Stage 2 | **Trust logos:** confirm the classification of each one (`website-audit.md` §6) |
 | 5 | Stage 7 | Booking: working hours, slot length (30 min?), buffers, minimum notice, video link (Google Meet, Teams or Zoom?), and which **calendar** Vadim uses |
-| 6 | Stage 7 | Custom booking (recommended) or a Cal.com embed? |
-| 7 | Stage 6–7 | Resend: who manages DNS at **IONOS** (to add SPF and DKIM records)? Which "from" address should we use? |
+| 6 | Stage 7 | Custom booking (recommended) or a Cal.com embed? If Vadim uses **Google Calendar**, the original source's unused Google Calendar integration can be rebuilt (with correct UK time zones) for real availability and invites |
+| 7 | Stage 6–7 | Email: keep **Brevo** (already used by the current site) or move to **Resend** as the brief suggests? Either way, who manages DNS at **IONOS**? Which "from" address should we use? |
 | 8 | Stage 5 | Partner programme: keep **10% lifetime commission**, or change the terms for accountancy practices and bookkeeping partnerships? |
 | 9 | Stage 8 | Keep the **US section** and the 22 London location pages? |
 | 10 | Stage 2 | Logo as **SVG**, plus a square brand mark |
 | 11 | Stage 4 | Real client testimonials or case studies we're allowed to publish (none will be invented) |
 | 12 | Stage 8 | Access to Google Search Console and analytics |
 | 13 | Footer | Registered company name and number |
+| 14 | Now | **Rotate the Brevo API key and the Tally API key.** The Brevo key was shared inside the source zip, and the Tally key is exposed in the live site's browser code (`website-audit.md` §9) |
 
 ---
 

@@ -1,13 +1,14 @@
 import type { LineItem, PricingApproval } from "./types";
 
 /**
- * "Outsource vs hire" calculator from the live Fractional Finance Department
- * page (chunk page-3575453204e79004.js, captured 21 Nov 2026).
+ * "Outsource vs hire" calculator — ported from the original source
+ * (reckonwell-main/src/app/components/FractionalFinanceCalculator.tsx,
+ * `calculateResults`), shown on reckonwell.com/fractional-finance-department.
  *
  * NOTE: payroll here is £6/employee/month, but the Instant Quote uses
  * £3/employee/month. Reckonwell must confirm the correct rate.
- * Salary benchmarks are the live site's figures and need a cited source
- * before reuse. See docs/website-audit.md §7.6.
+ * Salary benchmarks are the original site's assumptions (gross salaries have
+ * no cited source). See docs/pricing-rules.md §6 and §8.
  */
 export const FINANCE_TEAM_APPROVAL: PricingApproval = "recovered-unapproved";
 
@@ -27,6 +28,18 @@ export type FinanceTeamInput = {
   corpTax: boolean;
   monthlyRevenue: number;
 };
+
+/**
+ * Fully loaded annual cost of an employee, as derived in the original source:
+ * gross salary + 15% employer NI above a £5,000 threshold + 3% pension.
+ * e.g. £30,000 + 15% × £25,000 + 3% × £30,000 = £34,650.
+ */
+export function trueEmploymentCost(grossSalary: number): number {
+  return grossSalary + 0.15 * Math.max(0, grossSalary - 5_000) + 0.03 * grossSalary;
+}
+
+/** Assumed gross salaries from the original source (no cited source). */
+export const ASSUMED_SALARIES = { bookkeeper: 30_000, financeManager: 58_000 } as const;
 
 export const HIRING_BENCHMARKS = {
   bookkeeper: { name: "Bookkeeper / Accounts Assistant", annual: 34_650 },

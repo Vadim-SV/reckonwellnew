@@ -1,10 +1,11 @@
 import type { LineItem, PricingApproval } from "./types";
 
 /**
- * Instant Quote — pricing rules recovered verbatim from the live site's
- * compiled bundle (/quotation-calculator, chunk page-a867a3173d02f0d6.js,
- * captured 21 Nov 2026). Do not change these numbers without approval.
- * See docs/website-audit.md §7.1.
+ * Instant Quote — ported from the original source
+ * (reckonwell-main/src/app/quotation-calculator/page.tsx, `calculateQuote`),
+ * live at reckonwell.com/quotation-calculator. Verified identical to the
+ * original by randomised parity testing. Do not change these numbers without
+ * approval. See docs/pricing-rules.md §1.
  */
 export const INSTANT_QUOTE_APPROVAL: PricingApproval = "recovered-unapproved";
 
@@ -15,6 +16,8 @@ export const INSTANT_QUOTE_RATES = {
   finalAccounts: { under1k: 500, from1kTo10k: 750, over10k: 1000 }, // one-off, by monthly revenue, per company
   directorSelfAssessment: 200, // one-off, per director
   rdClaim: 300,
+  /** Shown beside the R&D option: invoiced separately once HMRC approves the claim. Not added to the total. */
+  rdSuccessFeePercent: 5,
   patentBox: 300,
   vatRegistration: 50,
   softwareSetup: 100,
