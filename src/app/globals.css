@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+/*
+ * Reckonwell design tokens.
+ * Core brand values are taken from the live site's CSS (reckonwell.com,
+ * captured 21 Nov 2026). Extended tints are derived from them.
+ * Full rationale: docs/design-system.md
+ */
+@theme {
+  /* Brand — verified from live CSS */
+  --color-navy: #12233f; /* --primary */
+  --color-navy-deep: #0b172b; /* --primary-hover */
+  --color-steel: #275e86; /* --secondary */
+  --color-cream: #fff1e0; /* --background */
+  --color-sand: #f6e9d8; /* --surface */
+  --color-oat: #e9decf; /* --card-darker */
+  --color-mist: #e3e7ed; /* --accent-tint */
+  --color-haze: #e4eaef; /* --secondary-light */
+  --color-ink: #000000; /* --foreground */
+  --color-body: #333333; /* --body-text */
+  --color-muted: #66605c; /* --muted */
+  --color-subtle: #8a8378; /* --muted-foreground */
+  --color-positive: #2d6a4f; /* --green-accent */
+  --color-negative: #8c3d2b; /* --red-accent */
+  --color-rose: #d69aab; /* link highlight on dark (footer) */
+  --color-slate-blue: #4a6fa5; /* supporting blue used on live pages */
+
+  /* Derived — for data visualisation and animated illustrations */
+  --color-navy-80: #2a3a55;
+  --color-navy-60: #59657a;
+  --color-steel-light: #8fb3cf;
+  --color-positive-light: #cfe5d9;
+  --color-negative-light: #efd5ce;
+
+  /* Typography — same families as the live site */
+  --font-display: var(--font-newsreader), "Newsreader", Georgia, serif;
+  --font-sans: var(--font-work-sans), "Work Sans", system-ui, sans-serif;
+
+  /* Shape — live site uses 2px; we allow slightly softer cards */
+  --radius-xs: 2px;
+  --radius-card: 10px;
+  --radius-panel: 18px;
+
+  --shadow-card: 0 1px 2px rgb(18 35 63 / 0.06), 0 8px 24px -12px rgb(18 35 63 / 0.18);
+  --shadow-float: 0 2px 4px rgb(18 35 63 / 0.06), 0 24px 48px -20px rgb(18 35 63 / 0.35);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --border: rgb(18 35 63 / 0.15);
+  --border-subtle: rgb(0 0 0 / 0.08);
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-navy);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-steel);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    /* Scroll-reveal content is always visible for reduced-motion users */
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer utilities {
+  /* CSS-only entrance for above-the-fold content: no JS needed, so it never
+     delays first paint. Stagger with style={{ animationDelay }}. */
+  .rise {
+    animation: rise 0.8s var(--ease-out-soft) both;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .border-hairline {
+    border-color: var(--border);
+  }
+}
