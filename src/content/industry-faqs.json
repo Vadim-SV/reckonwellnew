@@ -1,0 +1,112 @@
+{
+ "technology": [
+  {
+   "question": "Can my software company claim R&D tax relief?",
+   "answer": "Yes. From 1 April 2024 the UK merged its R&D schemes into a single scheme for most companies, replacing the old SME and RDEC schemes. Loss-making companies that are R&D-intensive (qualifying R&D expenditure is at least 30% of total expenditure) may qualify for the Enhanced R&D Intensive Support (ERIS) rate, which provides a higher payable credit. Software development that resolves genuine scientific or technological uncertainty can qualify, including work on algorithms, data processing and novel system architectures. We help you identify qualifying projects, prepare the technical narrative and submit the claim correctly."
+  },
+  {
+   "question": "How should a SaaS business recognise subscription revenue?",
+   "answer": "Subscription revenue must be recognised over the period to which it relates, not when cash is received. If a customer pays £1,200 for an annual licence upfront, only £100 per month is recognised as revenue; the remaining balance sits as deferred income on the balance sheet. This matters for your management accounts, your statutory accounts and for any investor who wants to understand your true recurring revenue position. Getting this wrong distorts your MRR, ARR and gross margin figures."
+  },
+  {
+   "question": "What financial reports do investors expect from a startup?",
+   "answer": "Investors typically expect a monthly management pack covering: a profit and loss account against budget, a balance sheet, a cash flow statement, a runway calculation, and key SaaS metrics such as MRR, ARR, churn rate, CAC and LTV. Board-level reporting often adds a commentary on headcount, burn rate and any material variances. We prepare these packs monthly so you are always ready for investor conversations and board meetings without scrambling for numbers at the last minute."
+  },
+  {
+   "question": "When does a startup need a fractional CFO instead of a bookkeeper?",
+   "answer": "A bookkeeper records transactions. A fractional CFO or fractional finance director interprets them, builds forecasts, challenges assumptions and helps you make better decisions. You need fractional CFO-level support when you are raising investment, managing a board, planning significant hiring, or when your burn rate means you have less than 12 months of runway. Reckonwell's fractional finance department provides both: daily bookkeeping and qualified oversight in one service, so you do not need to hire separately."
+  },
+  {
+   "question": "How do you calculate runway and burn rate?",
+   "answer": "Gross burn rate is your total monthly cash outflow. Net burn rate is the difference between cash out and cash in each month. Runway is your current cash balance divided by your net burn rate. For example, if you have £500,000 in the bank and your net burn is £50,000 per month, you have ten months of runway. We track these figures weekly so you always know where you stand and can model the impact of hiring decisions, new contracts or delayed revenue before committing."
+  }
+ ],
+ "ecommerce": [
+  {
+   "question": "How do you reconcile Shopify and Amazon payouts?",
+   "answer": "The correct approach is to record gross sales, platform fees and refunds as separate line items in your accounts — not just the net payout that lands in your bank. If you only book the net figure, your revenue is understated, your cost of sales is missing the platform fees, and your gross margin is meaningless. We use tools such as A2X or Link My Books to pull the detailed settlement data from each platform and post it correctly into Xero, so your accounts reflect what actually happened in your business."
+  },
+  {
+   "question": "Who accounts for VAT when I sell on a marketplace?",
+   "answer": "For overseas sellers and for goods imported into the UK with a value of £135 or less, the marketplace (Shopify, Amazon, eBay etc.) is responsible for collecting and remitting UK VAT — this is the deemed supplier rule. However, if you are a UK-established seller selling goods already in the UK, you are responsible for accounting for VAT on your own sales in the normal way. The rules are different again for B2B sales. We help you understand which rule applies to each of your sales channels and ensure your VAT returns are filed correctly."
+  },
+  {
+   "question": "How do I sell to EU customers and handle VAT?",
+   "answer": "If you are selling goods to consumers in EU member states, you may need to register for VAT in those countries or use the EU One Stop Shop (OSS) scheme. OSS allows you to report and pay VAT on all your EU B2C sales through a single registration in one EU member state, rather than registering separately in each country. The threshold for mandatory OSS registration is €10,000 of cross-border EU sales per year. We can help you understand your obligations and work with EU VAT specialists where registration is required."
+  },
+  {
+   "question": "How should I value stock at year end?",
+   "answer": "Under UK GAAP, stock is valued at the lower of cost and net realisable value. Cost includes the purchase price plus any directly attributable costs of bringing the stock to its present location and condition — typically freight and import duties. Net realisable value is the estimated selling price less any costs to complete and sell. If you have slow-moving or obsolete stock, you should write it down to its net realisable value. Getting this right matters because stock valuation directly affects your cost of goods sold and therefore your gross profit."
+  },
+  {
+   "question": "How can I see my real profit per channel?",
+   "answer": "To calculate true profit per channel you need to allocate not just the cost of goods sold but also the platform fees, advertising spend, fulfilment costs and returns for each channel separately. This requires your bookkeeping to track these costs by channel from the start, rather than lumping everything together. We set up your chart of accounts and reporting structure so that your monthly management accounts show gross margin and contribution by channel — Shopify, Amazon, wholesale, direct — so you can see where you are actually making money."
+  }
+ ],
+ "property": [
+  {
+   "question": "Should I buy property through a limited company (SPV)?",
+   "answer": "There are genuine advantages and disadvantages to holding property through a special purpose vehicle (SPV) limited company. Companies pay corporation tax on profits rather than income tax, and the Section 24 mortgage interest restriction — which limits individual landlords to a basic-rate tax credit on finance costs — does not apply to companies. However, extracting profits from a company incurs additional tax, and there are higher mortgage rates and arrangement fees for limited company buy-to-let products. The right answer depends on your personal tax position, the size of your portfolio and your long-term plans. We strongly recommend taking personal tax advice before making this decision."
+  },
+  {
+   "question": "Does Making Tax Digital for Income Tax apply to landlords?",
+   "answer": "Yes. Making Tax Digital for Income Tax Self Assessment (MTD for ITSA) will apply to landlords with qualifying income above the relevant threshold. From 6 April 2026, it is mandatory for those with qualifying income (including rental income) over £50,000. The threshold drops to £30,000 from April 2027 and to £20,000 from April 2028. Under MTD for ITSA, you will need to keep digital records and submit quarterly updates to HMRC using compatible software, rather than filing a single annual self-assessment return. We help landlords prepare for and comply with these requirements."
+  },
+  {
+   "question": "What expenses can a property SPV claim?",
+   "answer": "A property SPV can claim expenses that are wholly and exclusively for the purposes of the business. These typically include mortgage interest (in full, unlike individual landlords), letting agent fees, repairs and maintenance (not improvements), buildings and contents insurance, ground rent and service charges, accountancy fees, and any other costs directly related to managing the properties. Capital expenditure on improvements is not immediately deductible but may qualify for capital allowances in certain circumstances. We ensure all allowable expenses are claimed and that capital and revenue items are correctly distinguished."
+  },
+  {
+   "question": "How do director's loans work in a property company?",
+   "answer": "A director's loan account records money that a director has lent to or borrowed from their company. In property SPVs, directors often lend money to the company to fund deposits or refurbishments. This creates a creditor on the company's balance sheet that can be repaid tax-free. If a director borrows from the company, different rules apply: loans over £10,000 may be treated as a benefit in kind, and loans not repaid within nine months of the company's year end trigger a Section 455 tax charge. Keeping the director's loan account accurate and up to date is essential for both tax compliance and clean accounts."
+  },
+  {
+   "question": "What accounts does an SPV file with Companies House and HMRC?",
+   "answer": "A property SPV that is a private limited company must file annual accounts with Companies House and a corporation tax return (CT600) with HMRC each year. The accounts must be prepared in accordance with UK GAAP (typically FRS 102 or FRS 105 for micro-entities) and filed within nine months of the company's year end. The CT600 must be filed within 12 months of the accounting period end, and any corporation tax due must be paid within nine months and one day of the year end. We prepare and file both, ensuring the accounts are accurate and all deadlines are met."
+  }
+ ],
+ "manufacturing": [
+  {
+   "question": "How should a manufacturer value stock and work in progress?",
+   "answer": "Under UK GAAP, stock and work in progress (WIP) are valued at the lower of cost and net realisable value. For a manufacturer, cost includes raw materials, direct labour and an appropriate share of production overheads — not just the purchase price of materials. WIP is valued at the cost incurred to date, including materials consumed and labour applied. Finished goods include the full cost of production. Getting this right matters because stock valuation directly affects your cost of goods sold, your gross margin and your balance sheet. Overstating stock overstates profit; understating it understates profit."
+  },
+  {
+   "question": "Can manufacturers claim R&D tax relief for process improvements?",
+   "answer": "Yes, provided the work meets the definition of R&D for tax purposes. HMRC requires that the project seeks to achieve an advance in science or technology by resolving a scientific or technological uncertainty — not just an uncertainty about whether something is commercially viable. Process improvements that involve genuine technical challenges, such as developing a new manufacturing method, improving yield through novel techniques, or solving a materials science problem, can qualify. The merged R&D scheme applies from 1 April 2024. We help manufacturers identify qualifying projects, prepare the technical narrative and submit the claim correctly."
+  },
+  {
+   "question": "What is full expensing and does it apply to my machinery?",
+   "answer": "Full expensing is a 100% first-year capital allowance for companies on qualifying new plant and machinery. It was made permanent in the Autumn Statement 2023. It allows a company to deduct the full cost of qualifying capital expenditure in the year of purchase, rather than writing it down over several years. Qualifying assets include most new plant and machinery — CNC machines, production equipment, vehicles (excluding cars) and fixtures. Second-hand assets and assets for leasing do not qualify. The Annual Investment Allowance (AIA) provides a similar 100% deduction up to £1 million per year and applies to both new and second-hand assets."
+  },
+  {
+   "question": "How do I work out the true cost and margin of each product?",
+   "answer": "True product costing requires you to allocate not just direct materials and direct labour but also an appropriate share of manufacturing overheads — machine time, factory rent, utilities, quality control and supervision. This is known as absorption costing. Without it, your product margins are understated and you may be pricing products below their true cost without realising it. We help manufacturers set up a costing model that allocates overheads systematically, so you can see the true margin on each product line and make informed decisions about pricing, product mix and capacity."
+  },
+  {
+   "question": "How can we improve working capital?",
+   "answer": "Working capital is the difference between your current assets (stock, debtors, cash) and your current liabilities (creditors, short-term borrowings). Improving it means either reducing the cash tied up in stock and debtors or extending the time you take to pay suppliers. Practically, this means reviewing your stock holding levels and reorder points, tightening your credit control process to reduce debtor days, and negotiating better payment terms with suppliers. We model your working capital cycle and identify where the biggest improvements can be made, then track progress monthly so you can see the impact."
+  }
+ ],
+ "hospitality": [
+  {
+   "question": "What does the tips law mean for my restaurant?",
+   "answer": "The Employment (Allocation of Tips) Act 2023 came into force on 1 October 2024. It requires all employers to pass 100% of tips, gratuities and service charges to workers fairly, without any deductions. Employers must have a written tips policy and keep records of how tips are allocated. Workers can request information about how tips are distributed and can bring a claim to an employment tribunal if they believe the rules have not been followed. If you have not yet put a written policy in place, this is now a legal requirement."
+  },
+  {
+   "question": "How should tips and service charges be handled for payroll and NIC?",
+   "answer": "The tax treatment of tips depends on how they are collected and distributed. Tips paid directly by customers to staff (cash tips not controlled by the employer) are subject to income tax but not National Insurance contributions. Tips collected by the employer and distributed through a tronc scheme — managed by a troncmaster who is independent of the employer — are subject to income tax but not employer or employee NIC. Tips paid directly by the employer (not through a tronc) are subject to both income tax and NIC. A properly structured tronc scheme can therefore reduce the NIC cost for both employer and employee."
+  },
+  {
+   "question": "What VAT applies to hot food and takeaways?",
+   "answer": "The VAT rules for food in the hospitality sector are notoriously complex. Cold food sold for consumption off the premises is generally zero-rated. Hot food — food that has been heated for the purpose of enabling it to be consumed hot — is standard-rated at 20%, whether eaten in or taken away. Food sold for consumption on the premises (eat-in) is also standard-rated. Catering services, including delivery, are standard-rated. The distinction between hot and cold, and between on-premises and takeaway, requires careful application to your specific menu and service model."
+  },
+  {
+   "question": "What food and labour cost percentages should a restaurant aim for?",
+   "answer": "As a general guide, food cost as a percentage of food revenue typically ranges from 25% to 35%, and labour cost (including kitchen and front of house) typically ranges from 25% to 35%. Combined, these two costs often represent 55% to 70% of revenue, leaving a gross profit before other overheads of 30% to 45%. These are ranges, not targets — the right figures depend on your concept, price point, location and service model. A fine dining restaurant will have different benchmarks to a quick-service café. What matters is tracking your actual percentages consistently so you can identify when they are moving in the wrong direction."
+  },
+  {
+   "question": "How often should a restaurant reconcile its takings?",
+   "answer": "Daily. The reconciliation process should compare your EPOS system's reported sales for the day against the actual cash in the till and the card terminal receipts, and then against the bank deposits. Any discrepancy needs to be investigated immediately — a pattern of small discrepancies can indicate a process problem or, in the worst case, theft. Waiting until the end of the week or month to reconcile means discrepancies are harder to investigate and errors accumulate. Reckonwell reconciles your daily takings as part of our standard service for hospitality clients."
+  }
+ ]
+}

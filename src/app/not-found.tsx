@@ -11,14 +11,14 @@ export default function NotFound() {
     <Section spacing="lg">
       <Container size="narrow" className="text-center">
         <Eyebrow>404</Eyebrow>
-        <h1 className="mt-4 text-5xl">This page isn&apos;t here yet.</h1>
+        <h1 className="mt-4 text-5xl">We couldn&apos;t find that page.</h1>
         <p className="mt-6 text-lg">
-          The new Reckonwell website is being built in stages, so some links won&apos;t work yet.
+          It may have moved. Try one of these instead.
         </p>
         <div className="mt-10 flex justify-center gap-3">
           <ButtonLink href="/">Back to the homepage</ButtonLink>
-          <ButtonLink href="/design-system" variant="secondary">
-            View the design system
+          <ButtonLink href="/services" variant="secondary">
+            Our services
           </ButtonLink>
         </div>
       </Container>

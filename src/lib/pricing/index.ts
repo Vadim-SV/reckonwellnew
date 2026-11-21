@@ -6,3 +6,4 @@ export * from "./finance-team-comparison";
 export * from "./self-assessment";
 export * from "./rd-claim-fee";
 export * from "./published-prices";
+export * from "./registry";

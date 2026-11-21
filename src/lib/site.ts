@@ -5,7 +5,7 @@
  */
 export const site = {
   name: "Reckonwell",
-  legalName: "Reckonwell", // TODO: confirm registered company name and number for the footer
+  legalName: "Reckonwell Ltd", // from the original privacy policy; TODO: add company number
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.reckonwell.com",
   tagline: "We look after the financial side of growing businesses.",
   description:
