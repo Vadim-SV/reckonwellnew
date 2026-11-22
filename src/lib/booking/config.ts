@@ -1,7 +1,11 @@
 /**
- * Discovery-call availability rules. These are sensible defaults pending
- * Reckonwell's confirmation (docs/launch-readiness.md). All times are UK
- * local time (Europe/London), so British Summer Time is handled correctly.
+ * Discovery-call availability rules. All times are UK local time
+ * (Europe/London), so British Summer Time is handled correctly.
+ *
+ * Confirmed by Reckonwell (22 Nov 2026): Google Calendar for live booking;
+ * calls start between 09:30 and 16:30 (the last call runs 16:30–17:00).
+ * Still defaults, awaiting confirmation: 30-minute calls, 15-minute buffer,
+ * 24 hours' notice, 3 weeks ahead.
  */
 export const BOOKING = {
   timeZone: "Europe/London",

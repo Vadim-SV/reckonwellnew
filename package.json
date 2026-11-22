@@ -12,7 +12,9 @@
     "test:watch": "vitest",
     "check": "npm run lint && npm run typecheck && npm run test && npm run build",
     "seo:audit": "node scripts/seo-audit.mjs",
-    "test:db": "TEST_DATABASE_URL=${TEST_DATABASE_URL:-postgres://postgres@127.0.0.1:55432/reckonwell_test} vitest run src/lib/store"
+    "test:db": "TEST_DATABASE_URL=${TEST_DATABASE_URL:-postgres://postgres@127.0.0.1:55432/reckonwell_test} vitest run src/lib/store",
+    "calendar:auth": "node scripts/google-calendar-auth.mjs",
+    "calendar:check": "node scripts/google-calendar-check.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -52,17 +52,37 @@ The temporary `/book` redirect has been removed now that `/book` is a real page.
 
 *Behaviour without a key:* in development, emails are printed to the terminal. In production, a form that cannot email **and** cannot store returns a clear error with the phone number and email address, so no enquiry is silently lost.
 
-## 4. Calendar integration (live booking)
+## 4. Calendar integration (live booking): Google Calendar ✅ confirmed
 
-The site uses **Google Calendar** (the variable names match the old site's unused integration). It needs a Google account whose calendar Vadim actually uses for meetings.
+**Decided 22 November 2026:** live booking uses **Google Calendar**. Calls can start between **09:30 and 16:30** UK time, Monday to Friday (the last call runs 16:30–17:00).
 
-1. In Google Cloud Console, create a project, enable the **Google Calendar API**, and create an **OAuth client ID** (type "Web application").
-2. Generate a **refresh token** with the scope `https://www.googleapis.com/auth/calendar.events` plus `…/calendar.freebusy` (or `…/calendar`), signed in as the calendar owner. The OAuth Playground is the simplest way.
-3. Set `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, `GOOGLE_OAUTH_REFRESH_TOKEN` and `GOOGLE_CALENDAR_ID` (usually the account's email address).
-4. Set `DATABASE_URL` too (strongly recommended): bookings are recorded, and a database unique index blocks double bookings.
-5. Optional: `BOOKING_CREATE_GOOGLE_MEET=false` to stop creating Meet links; `BOOKING_LOCATION` for a fixed location or Teams link.
+### One-off setup (about 15 minutes)
 
-**Rules** (`src/lib/booking/config.ts`, defaults awaiting your confirmation): Monday–Friday, 30-minute calls, starts 09:30–16:30 UK time, 15-minute buffer around existing events, 24 hours' minimum notice, three weeks ahead, England & Wales bank holidays (2026–2027) excluded.
+1. **Google Cloud project.** At console.cloud.google.com create a project (e.g. "Reckonwell website"), then go to *APIs & Services → Library* and enable the **Google Calendar API**.
+2. **OAuth consent screen.** *APIs & Services → OAuth consent screen*:
+   - If the calendar is on **Google Workspace**, choose user type **Internal**. Tokens then don't expire.
+   - If it's a personal Gmail account, choose **External**, add the account as a test user, and then **publish the app** ("In production"). Tokens for apps left in "Testing" stop working after 7 days.
+3. **OAuth client.** *APIs & Services → Credentials → Create credentials → OAuth client ID*, with application type **Desktop app**. Note the client ID and secret.
+4. **Get the refresh token** on your own computer, from the repository folder:
+   ```bash
+   GOOGLE_OAUTH_CLIENT_ID=… GOOGLE_OAUTH_CLIENT_SECRET=… npm run calendar:auth
+   ```
+   Open the link it prints and **sign in as the account that owns the calendar used for meetings**. The token is printed in the terminal only. Only two permissions are requested: view free/busy times and manage events.
+5. **Set the environment variables** in the hosting provider (Production and Preview), never in a committed file:
+   `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, `GOOGLE_OAUTH_REFRESH_TOKEN`, `GOOGLE_CALENDAR_ID` (normally the calendar owner's email address), plus `DATABASE_URL` (strongly recommended: it records bookings and blocks double bookings at the database level).
+6. **Check it works** (locally with a `.env.local`, which is git-ignored):
+   ```bash
+   node --env-file=.env.local scripts/google-calendar-check.mjs --write
+   ```
+   This checks the token, reads free/busy times, and creates and immediately deletes a private test event two years ahead **without sending any invitation**.
+7. **Preview test:** open `/book` on the preview deployment. It should now show real time slots instead of "Request a call". Book a slot with your own email and check that the event, Meet link, invitation and both emails arrive.
+
+### Options
+- `BOOKING_CREATE_GOOGLE_MEET=false` stops creating a Google Meet link for each call (on by default).
+- `BOOKING_LOCATION` sets a fixed location or Teams link, used when no Meet link is created.
+
+### Rules (`src/lib/booking/config.ts`)
+Monday–Friday, starts 09:30–16:30 UK time (**confirmed**). Still defaults, awaiting confirmation: 30-minute calls, a 15-minute buffer around existing events, 24 hours' minimum notice, three weeks ahead. England & Wales bank holidays (2026–2027) are excluded and need adding each year.
 
 **How double bookings are prevented:**
 1. Availability excludes busy calendar time and bookings in progress.
@@ -72,9 +92,7 @@ The site uses **Google Calendar** (the variable names match the old site's unuse
 
 **Confirmations are sent only after the event exists.** If anything fails, the slot is released and no confirmation is sent.
 
-*Without Google credentials:* `/book` shows "Request a call". Visitors choose up to three working days and a time of day, and Vadim confirms by email. No invented time slots are ever shown.
-
-> If Vadim's calendar is on IONOS or Microsoft 365 rather than Google, the calendar module (`src/lib/booking/calendar.ts`) has a small interface (`busy` + `createEvent`) that can be implemented for CalDAV or Microsoft Graph.
+*Until the credentials are set,* `/book` keeps working in "Request a call" mode. Visitors choose up to three working days and a time of day, and Vadim confirms by email. No invented time slots are ever shown.
 
 ## 5. PDF quotations
 
@@ -125,8 +143,8 @@ Ten items, nine open; payroll is resolved. See [`pricing-conflicts-report.md`](.
 | 1 | Rotate the Brevo key; rotate the Tally key (exposed on the old site) | Reckonwell | ☐ |
 | 2 | Authenticate reckonwell.com in Brevo (DNS at IONOS) | Reckonwell | ☐ |
 | 3 | Create a Postgres database and set `DATABASE_URL` | Reckonwell / dev | ☐ |
-| 4 | Decide: Google Calendar for live booking (or keep request mode) and set the credentials | Reckonwell | ☐ |
-| 5 | Confirm booking hours, call length, notice and buffer | Reckonwell | ☐ |
+| 4 | Google Calendar chosen ✅ — create the OAuth client, run `npm run calendar:auth`, set the four variables, run `calendar:check --write` | Reckonwell | ◐ |
+| 5 | Booking hours 09:30–16:30 ✅ — still to confirm: call length, notice period and buffer | Reckonwell | ◐ |
 | 6 | Resolve the pricing conflicts (report) and VAT wording | Reckonwell | ☐ |
 | 7 | Approve privacy policy changes (fix the "[X years]" placeholder) | Reckonwell + adviser | ☐ |
 | 8 | Confirm trust logo classifications (certification / membership / partner) | Reckonwell | ☐ |
