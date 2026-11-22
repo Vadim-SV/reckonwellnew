@@ -9,9 +9,9 @@ import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
 
 export const metadata: Metadata = {
-  title: "Partner Programme for Accountants, Advisers & Introducers",
+  title: "Partner Programme for Accountants & Advisers",
   description:
-    "Partner with Reckonwell: refer clients who need ongoing bookkeeping and finance support, or work with us on outsourced bookkeeping. 10% of the monthly fee for as long as the client stays.",
+    "Refer clients who need ongoing bookkeeping and finance support, or work with us on outsourced bookkeeping. 10% of the monthly fee while the client stays.",
   alternates: { canonical: "/partners" },
 };
 

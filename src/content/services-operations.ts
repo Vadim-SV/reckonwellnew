@@ -17,7 +17,7 @@ export const operationsServices: Service[] = [
     lede: "We look after your supplier invoices from the moment they arrive: checking them, coding them, reconciling supplier statements and preparing payment runs for you to approve.",
     metaTitle: "Outsourced Accounts Payable Services",
     metaDescription:
-      "Outsourced accounts payable for growing UK businesses: supplier invoices captured and checked, statements reconciled and payment runs prepared for your approval.",
+      "Outsourced accounts payable for UK businesses: supplier invoices checked, statements reconciled and payment runs prepared for your approval.",
     tool: { kind: "scoping", key: "accounts-payable" },
     calculatorTitle: "Tell us how you pay suppliers",
     calculatorIntro:

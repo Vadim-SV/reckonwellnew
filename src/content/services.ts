@@ -70,9 +70,9 @@ const coreServices: Service[] = [
     eyebrow: "Outsourced financial operations",
     title: "Your finance team, without the hiring.",
     lede: "When the finance workload outgrows the people you have, you don't have to recruit. We take on the bookkeeping, payables, receivables, payroll and monthly reporting, and work alongside anyone you already have.",
-    metaTitle: "Outsourced Finance Team & Financial Operations",
+    metaTitle: "Outsourced Finance Team for SMEs",
     metaDescription:
-      "Extend your finance team without hiring. Reckonwell runs bookkeeping, accounts payable, credit control, payroll and monthly management accounts for established UK companies.",
+      "Extend your finance team without hiring. Reckonwell runs bookkeeping, accounts payable, credit control, payroll and management accounts for UK SMEs.",
     tool: { kind: "calculator", key: "finance-team" },
     illustration: "finance-team",
     calculatorTitle: "What would it cost to hire instead?",
@@ -125,9 +125,9 @@ const coreServices: Service[] = [
     eyebrow: "Outsourced bookkeeping",
     title: "Books that are right, every month.",
     lede: "We code your transactions, reconcile every account and keep your records up to date — so you always know where the business stands and year-end holds no surprises.",
-    metaTitle: "Outsourced Bookkeeping Services for Growing Businesses",
+    metaTitle: "Outsourced Bookkeeping UK for Growing Companies",
     metaDescription:
-      "Outsourced bookkeeping for UK businesses: transactions coded, bank accounts reconciled and records kept up to date in Xero or QuickBooks. Get an instant estimate.",
+      "Outsourced bookkeeping for growing UK companies: transactions coded and accounts reconciled every month in Xero or QuickBooks. Get an instant estimate.",
     tool: { kind: "calculator", key: "bookkeeping" },
     illustration: "bookkeeping",
     calculatorTitle: "Estimate your bookkeeping fee",

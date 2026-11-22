@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { contactSchema, fieldErrors } from "@/lib/forms/schemas";
+import { track } from "@/lib/analytics";
 import type { CalculatorKey } from "@/lib/pricing/registry";
 import type { ScopingKey } from "@/lib/scoping/registry";
 import { Consent, Honeypot, TextArea, TextField } from "./inputs";
@@ -24,6 +25,9 @@ export function EnquiryForm({ source, calculator, submitLabel = "Send enquiry", 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [serverError, setServerError] = useState("");
+  const [reference, setReference] = useState("");
+  // One key per form: if the request is retried or double-submitted, the server recognises it.
+  const [idempotencyKey] = useState(() => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : undefined));
 
   const update = (key: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setValues((v) => ({ ...v, [key]: e.target.value }));
@@ -43,14 +47,20 @@ export function EnquiryForm({ source, calculator, submitLabel = "Send enquiry", 
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source, calculator, contact, website }),
+        body: JSON.stringify({ source, calculator, contact, website, idempotencyKey }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         if (data.fields) setErrors(data.fields);
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
+      setReference(typeof data.reference === "string" ? data.reference : "");
       setStatus("sent");
+      if (calculator) track("calculator_completed", { source, tool: calculator.key });
+      track(
+        source === "instant-quote" ? "instant_quote_submitted" : source === "startups" ? "startup_enquiry_submitted" : "contact_form_submitted",
+        { source },
+      );
     } catch (err) {
       setStatus("error");
       setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
@@ -63,9 +73,13 @@ export function EnquiryForm({ source, calculator, submitLabel = "Send enquiry", 
         <CheckCircle2 className="mx-auto size-10 text-positive" aria-hidden />
         <h3 className="mt-4 text-2xl">Thank you — we&apos;ve got your details.</h3>
         <p className="mx-auto mt-3 max-w-md text-body">
-          We&apos;ve sent a confirmation to {values.email}
-          {calculator ? " with a copy of your details" : ""}. We&apos;ll be in touch shortly.
+          We&apos;ll email a confirmation to {values.email}
+          {calculator ? ", with a PDF copy of your details" : ""}. We&apos;ll be in touch shortly.
         </p>
+        {reference && <p className="mt-3 text-sm text-muted">Your reference: <strong className="text-ink">{reference}</strong></p>}
+        <a href="/book" className="mt-6 inline-flex min-h-11 items-center bg-navy px-5 text-sm font-medium text-cream hover:bg-navy-deep">
+          Book a discovery call
+        </a>
       </div>
     );
   }

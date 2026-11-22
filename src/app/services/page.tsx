@@ -10,7 +10,7 @@ import { serviceGroups, services } from "@/content/services";
 export const metadata: Metadata = {
   title: "Accounting & Financial Operations Services",
   description:
-    "Outsourced finance team, bookkeeping, payroll, VAT, annual accounts, Self Assessment, Making Tax Digital and R&D tax relief — each with an instant price calculator.",
+    "Finance outsourcing for SMEs: bookkeeping, accounts payable, credit control, management accounts, payroll, VAT and year-end — each with its own calculator.",
   alternates: { canonical: "/services" },
 };
 

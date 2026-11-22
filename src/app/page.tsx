@@ -18,9 +18,9 @@ import { services } from "@/content/services";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "Outsourced Finance Team & Bookkeeping for Established Companies | Reckonwell" },
+  title: { absolute: "Outsourced Finance Team & Bookkeeping UK | Reckonwell" },
   description:
-    "Extend your finance team without hiring. Reckonwell manages bookkeeping, accounts payable, credit control, payroll and monthly reporting for established UK companies.",
+    "Extend your finance team without hiring. We manage bookkeeping, accounts payable, credit control, payroll and monthly reporting for growing UK companies.",
   alternates: { canonical: "/" },
 };
 

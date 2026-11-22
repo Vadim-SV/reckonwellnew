@@ -9,6 +9,7 @@ export function labelForSource(source: string): string {
     "instant-quote": "Instant quote",
     partners: "Partner programme",
     startups: "Startups (Founder's Launch Offer)",
+    book: "Book a discovery call",
   };
   if (fixed[source]) return fixed[source];
   const service = services.find((s) => s.slug === source);

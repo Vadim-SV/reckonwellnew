@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { fieldErrors, partnerSchema, partnerTypes } from "@/lib/forms/schemas";
+import { track } from "@/lib/analytics";
 import { Consent, Honeypot, SelectField, TextArea, TextField } from "./inputs";
 
 const empty = { firstName: "", lastName: "", email: "", phone: "", organisation: "", partnerType: "", message: "" };
@@ -15,6 +16,7 @@ export function PartnerForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [serverError, setServerError] = useState("");
+  const [idempotencyKey] = useState(() => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : undefined));
 
   const update =
     (key: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -22,7 +24,7 @@ export function PartnerForm() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const payload = { ...values, consent, website };
+    const payload = { ...values, consent, website, idempotencyKey };
     const parsed = partnerSchema.safeParse(payload);
     if (!parsed.success) {
       setErrors(fieldErrors(parsed.error));
@@ -42,6 +44,7 @@ export function PartnerForm() {
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
       setStatus("sent");
+      track("partner_enquiry_submitted", { source: "partners" });
     } catch (err) {
       setStatus("error");
       setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.");

@@ -30,7 +30,7 @@ export const industries: Industry[] = [
     summary: "Recurring revenue, R&D claims and clear reports for investors.",
     title: "Finance support for technology and SaaS companies.",
     lede: "Subscription revenue, development costs and investor reporting make technology finance more involved than it looks. We keep the books accurate every month so your MRR, margins and runway are numbers you can trust.",
-    metaTitle: "Accountants for Technology & SaaS Companies",
+    metaTitle: "Accounting Services for Technology Companies",
     metaDescription:
       "Outsourced bookkeeping, management accounts and R&D tax relief for UK technology and SaaS companies — recurring revenue, deferred income and investor reporting.",
     challenges: [
@@ -56,7 +56,7 @@ export const industries: Industry[] = [
     summary: "Marketplace payouts, platform fees, stock and VAT across channels.",
     title: "Finance support for e-commerce businesses.",
     lede: "Shopify, Amazon and payment-provider payouts bundle sales, fees and refunds together. We separate them properly so you can see real margins by channel, value stock correctly and file VAT with confidence.",
-    metaTitle: "E-Commerce Accountants for Shopify & Amazon Sellers",
+    metaTitle: "E-commerce Bookkeeping for Shopify & Amazon Sellers",
     metaDescription:
       "Outsourced bookkeeping for UK e-commerce businesses: Shopify and Amazon payout reconciliation, platform fees, stock and VAT across sales channels.",
     challenges: [
@@ -82,7 +82,7 @@ export const industries: Industry[] = [
     summary: "Landlords, SPVs, rental income, finance costs and portfolio cash flow.",
     title: "Finance support for property businesses and SPVs.",
     lede: "Whether you hold property personally or through limited companies, we keep rental income, finance costs and director's loans accurately recorded across your portfolio — and handle the accounts and tax returns that follow.",
-    metaTitle: "Property Accountants for Landlords & SPV Companies",
+    metaTitle: "Property Company Accounting for Landlords & SPVs",
     metaDescription:
       "Bookkeeping, accounts and tax for UK landlords and property SPVs: rental income, mortgage interest, director's loans, MTD for Income Tax and CT600s.",
     challenges: [
@@ -108,7 +108,7 @@ export const industries: Industry[] = [
     summary: "Stock, production costs, margins, working capital and controls.",
     title: "Finance support for manufacturers.",
     lede: "Stock, work in progress and production overheads make manufacturing accounts demanding. We keep purchasing, costing and stock records in order so your margins are accurate and your working capital is under control.",
-    metaTitle: "Manufacturing Accountants & Outsourced Finance",
+    metaTitle: "Manufacturing Bookkeeping & Outsourced Finance",
     metaDescription:
       "Outsourced bookkeeping and management accounts for UK manufacturers: stock and WIP, product costing, margins, working capital and capital allowances.",
     challenges: [
@@ -134,7 +134,7 @@ export const industries: Industry[] = [
     summary: "Daily takings, supplier costs, tips, payroll, VAT and margins.",
     title: "Finance support for restaurants, bars and hospitality groups.",
     lede: "High transaction volumes, tips, shift-based payroll and complex VAT on food mean hospitality finance never stops. We reconcile your takings, run payroll and keep food and labour costs in view across every site.",
-    metaTitle: "Restaurant & Hospitality Accountants",
+    metaTitle: "Hospitality Bookkeeping for Restaurants & Bars",
     metaDescription:
       "Outsourced bookkeeping, payroll and VAT for UK restaurants, bars and hospitality groups: daily takings, tips and tronc, supplier costs and margins.",
     challenges: [

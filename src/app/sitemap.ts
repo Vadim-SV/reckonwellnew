@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...industries.map((i) => entry(`/industries/${i.slug}`, 0.8)),
     entry("/instant-quote", 0.8),
     entry("/partners", 0.6),
+    entry("/book", 0.8),
     entry("/contact", 0.6),
     entry("/privacy-policy", 0.2),
     entry("/terms-of-service", 0.2),

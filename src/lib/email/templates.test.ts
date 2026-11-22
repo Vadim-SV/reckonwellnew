@@ -13,7 +13,7 @@ const contact = {
 
 describe("email templates", () => {
   it("escapes user input in the internal email", () => {
-    const { html } = enquiryInternalEmail({ contact, sourceLabel: "VAT returns" });
+    const { html } = enquiryInternalEmail({ contact, sourceLabel: "VAT returns", reference: "RW-TEST" });
     expect(html).not.toContain("<script>");
     expect(html).not.toContain("<img src=x");
     expect(html).toContain("&lt;script&gt;");

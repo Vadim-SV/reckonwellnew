@@ -3,7 +3,7 @@ import { CalculatorSection } from "@/components/calculators/CalculatorSection";
 import { PageHero } from "@/components/sections/PageHero";
 
 export const metadata: Metadata = {
-  title: "Instant Quote",
+  title: "Instant Quote for Bookkeeping & Accounting",
   description:
     "Get an instant indicative quote for bookkeeping, payroll, year-end accounts and other services. Your price updates as you go.",
   alternates: { canonical: "/instant-quote" },

@@ -4,7 +4,7 @@ import { LegalPage, Section } from "@/components/sections/LegalPage";
 // Wording carried over unchanged from the original reckonwell.com terms of service.
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Reckonwell terms of service for our accounting services.",
+  description: "The terms of service that apply to Reckonwell Ltd's accounting, bookkeeping and financial operations services.",
   alternates: { canonical: "/terms-of-service" },
 };
 
