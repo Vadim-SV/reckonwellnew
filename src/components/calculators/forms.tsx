@@ -311,7 +311,7 @@ function InstantQuote({ value: v, set }: FormProps<"instant-quote">) {
 
       <Field label="Monthly services">
         <Toggle label="Bookkeeping" hint="£2 per transaction" checked={v.bookkeepingRequired} onChange={(b) => set({ bookkeepingRequired: b })} />
-        <Toggle label="Payroll" hint="£3 per employee" checked={v.payrollRequired} onChange={(b) => set({ payrollRequired: b })} />
+        <Toggle label="Payroll" hint="£4 per employee, from £25 a month" checked={v.payrollRequired} onChange={(b) => set({ payrollRequired: b })} />
       </Field>
       {v.bookkeepingRequired && (
         <NumberField label="Transactions per month" max={100_000} step={10} value={v.transactionsPerMonth} onChange={(n) => set({ transactionsPerMonth: n })} />

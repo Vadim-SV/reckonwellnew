@@ -1,3 +1,4 @@
+import { PAYROLL_RATE, payrollMonthlyFee, payrollNote } from "./payroll";
 import type { LineItem, PricingApproval } from "./types";
 
 /**
@@ -6,12 +7,16 @@ import type { LineItem, PricingApproval } from "./types";
  * live at reckonwell.com/quotation-calculator. Verified identical to the
  * original by randomised parity testing. Do not change these numbers without
  * approval. See docs/pricing-rules.md §1.
+ *
+ * Change from the original: payroll is £4/employee with a £25 monthly
+ * minimum (see ./payroll.ts), replacing £3/employee.
  */
 export const INSTANT_QUOTE_APPROVAL: PricingApproval = "recovered-unapproved";
 
 export const INSTANT_QUOTE_RATES = {
   bookkeepingPerTransaction: 2, // £/month per monthly transaction
-  payrollPerEmployee: 3, // £/month per employee
+  payrollPerEmployee: PAYROLL_RATE.perEmployee, // £/month per employee
+  payrollMonthlyMinimum: PAYROLL_RATE.monthlyMinimum,
   selfAssessment: 200, // one-off, sole traders
   finalAccounts: { under1k: 500, from1kTo10k: 750, over10k: 1000 }, // one-off, by monthly revenue, per company
   directorSelfAssessment: 200, // one-off, per director
@@ -108,8 +113,8 @@ export function calculateInstantQuote(input: InstantQuoteInput): InstantQuoteRes
     : 0;
   if (bookkeeping > 0) monthly.push({ label: "Bookkeeping", amount: bookkeeping });
 
-  const payroll = input.payrollRequired ? r.payrollPerEmployee * input.employees : 0;
-  if (payroll > 0) monthly.push({ label: "Payroll", amount: payroll });
+  const payroll = input.payrollRequired ? payrollMonthlyFee(input.employees) : 0;
+  if (payroll > 0) monthly.push({ label: "Payroll", amount: payroll, note: payrollNote(input.employees) });
 
   if (input.businessType === "sole-trader" && input.selfAssessmentRequired) {
     oneoff.push({ label: "Self Assessment", amount: r.selfAssessment });

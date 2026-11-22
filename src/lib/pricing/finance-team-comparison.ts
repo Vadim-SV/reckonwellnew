@@ -1,3 +1,4 @@
+import { payrollMonthlyFee } from "./payroll";
 import type { LineItem, PricingApproval } from "./types";
 
 /**
@@ -5,8 +6,7 @@ import type { LineItem, PricingApproval } from "./types";
  * (reckonwell-main/src/app/components/FractionalFinanceCalculator.tsx,
  * `calculateResults`), shown on reckonwell.com/fractional-finance-department.
  *
- * NOTE: payroll here is £6/employee/month, but the Instant Quote uses
- * £3/employee/month. Reckonwell must confirm the correct rate.
+ * Payroll uses the shared rule in ./payroll.ts (was £6/employee here).
  * Salary benchmarks are the original site's assumptions (gross salaries have
  * no cited source). See docs/pricing-rules.md §6 and §8.
  */
@@ -50,7 +50,7 @@ export const HIRING_BENCHMARKS = {
 
 export function calculateFinanceTeamComparison(e: FinanceTeamInput) {
   const bookkeeping = e.bookkeeping && e.transactions > 0 ? 2 * e.transactions : 0;
-  const payroll = e.payroll && e.employees > 0 ? 6 * e.employees : 0;
+  const payroll = e.payroll ? payrollMonthlyFee(e.employees) : 0;
   const hrAssistance = e.payroll && e.hrAssistance && e.employees > 0 ? 5 * e.employees : 0;
   const vat = e.vat && e.vatReturns > 0 ? (150 * e.vatReturns) / 12 : 0;
   const baseMonthly = bookkeeping + payroll + hrAssistance + vat;

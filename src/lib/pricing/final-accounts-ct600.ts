@@ -1,3 +1,4 @@
+import { payrollMonthlyFee } from "./payroll";
 import type { LineItem, PricingApproval } from "./types";
 
 /**
@@ -58,7 +59,7 @@ export function calculateCt600Monthly(input: Ct600Input): { monthly: number; bre
 
   let total = afterVolume;
   if (headcount > 0) {
-    const payroll = 40 * headcount;
+    const payroll = payrollMonthlyFee(headcount); // was £40 × headcount in the original
     breakdown.push({ label: `Payroll (${headcount} employees)`, amount: payroll });
     total += payroll;
   }

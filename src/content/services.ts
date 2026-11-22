@@ -146,7 +146,7 @@ export const services: Service[] = [
       "Outsourced payroll for UK businesses: monthly payroll, payslips, RTI submissions, pension auto-enrolment, starters and leavers. Get an instant estimate.",
     calculator: "payroll",
     calculatorTitle: "Estimate your payroll fee",
-    calculatorIntro: "Payroll is priced per employee per month.",
+    calculatorIntro: "Payroll is £4 per employee per month, from £25 a month.",
     includes: [
       { title: "Monthly payroll", text: "Gross-to-net calculations, deductions and a payment summary ready for your bank." },
       { title: "Payslips", text: "Clear payslips sent securely to every employee." },

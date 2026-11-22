@@ -6,6 +6,8 @@ import {
   calculateMtdMonthly,
   emptyInstantQuoteInput,
   quoteReference,
+  payrollMonthlyFee,
+  payrollNote,
   calculateSelfAssessmentMonthly,
   calculateRdClaimFee,
   trueEmploymentCost,
@@ -20,19 +22,19 @@ describe("Instant Quote (recovered rules)", () => {
     expect(r.oneoffTotal).toBe(0);
   });
 
-  it("prices bookkeeping at £2 per transaction and payroll at £3 per employee", () => {
+  it("prices bookkeeping at £2 per transaction and payroll at £4 per employee", () => {
     const r = calculateInstantQuote({
       ...emptyInstantQuoteInput,
       bookkeepingRequired: true,
       transactionsPerMonth: 100,
       payrollRequired: true,
-      employees: 5,
+      employees: 10,
     });
     expect(r.monthlyBreakdown).toEqual([
       { label: "Bookkeeping", amount: 200 },
-      { label: "Payroll", amount: 15 },
+      { label: "Payroll", amount: 40, note: "£4 per employee" },
     ]);
-    expect(r.monthlyTotal).toBe(215);
+    expect(r.monthlyTotal).toBe(240);
   });
 
   it("applies revenue bands for Final Accounts and multiplies across a group", () => {
@@ -96,8 +98,8 @@ describe("Final Accounts & CT600 monthly (recovered rules)", () => {
       raisingInvestment: true,
       managementAccounts: true,
     });
-    // base 300 → ×1.3 = 390 → ×1.2 = 468; +520 payroll +60 VAT +100 MA +50 +200 +100
-    expect(r.monthly).toBe(1498);
+    // base 300 → ×1.3 = 390 → ×1.2 = 468; +52 payroll (13 × £4) +60 VAT +100 MA +50 +200 +100
+    expect(r.monthly).toBe(1030);
   });
 });
 
@@ -128,10 +130,10 @@ describe("Outsource vs hire comparison (recovered rules)", () => {
       corpTax: true,
       monthlyRevenue: 5000,
     });
-    expect(r.totalMonthly).toBe(200 + 30 + 50);
+    expect(r.totalMonthly).toBe(200 + 25 + 50); // 5 employees → £25 minimum
     expect(r.corpTaxFee).toBe(750);
     expect(r.hiringAnnual).toBe(34_650);
-    expect(r.annualSavings).toBe(34_650 - 12 * 280);
+    expect(r.annualSavings).toBe(34_650 - 12 * 275);
   });
 });
 
@@ -176,5 +178,32 @@ describe("Hiring benchmarks", () => {
   it("reproduces the original derivation of the true employment cost", () => {
     expect(trueEmploymentCost(ASSUMED_SALARIES.bookkeeper)).toBe(HIRING_BENCHMARKS.bookkeeper.annual);
     expect(trueEmploymentCost(ASSUMED_SALARIES.financeManager)).toBe(HIRING_BENCHMARKS.financeManager.annual);
+  });
+});
+
+describe("Payroll rule (£4 per employee, £25 minimum)", () => {
+  it("charges nothing for no employees", () => {
+    expect(payrollMonthlyFee(0)).toBe(0);
+  });
+  it("applies the £25 minimum up to six employees", () => {
+    expect([1, 3, 6].map(payrollMonthlyFee)).toEqual([25, 25, 25]);
+    expect(payrollNote(3)).toBe("minimum £25");
+  });
+  it("charges £4 per employee from seven upwards", () => {
+    expect(payrollMonthlyFee(7)).toBe(28);
+    expect(payrollMonthlyFee(50)).toBe(200);
+    expect(payrollNote(7)).toBe("£4 per employee");
+  });
+  it("is used by the CT600 package for 1–5 employees (counted as 3)", () => {
+    const r = calculateCt600Monthly({
+      annualProfit: 100_000,
+      employees: "1-5",
+      monitoring: "annual",
+      transactions: "low",
+      hasRdSpend: false,
+      raisingInvestment: false,
+      managementAccounts: false,
+    });
+    expect(r.breakdown).toContainEqual({ label: "Payroll (3 employees)", amount: 25 });
   });
 });

@@ -1,4 +1,5 @@
 export * from "./types";
+export * from "./payroll";
 export * from "./instant-quote";
 export * from "./final-accounts-ct600";
 export * from "./making-tax-digital";

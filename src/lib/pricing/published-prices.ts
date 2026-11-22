@@ -63,12 +63,12 @@ export const PUBLISHED_PRICES: PublishedPrice[] = [
   },
   {
     service: "Payroll",
-    display: "From £40/employee",
-    amount: 40,
-    basis: "per-employee-monthly",
-    source: "services/page.tsx, limited-company-accounting/page.tsx",
-    consistentWithCalculator: false,
-    comment: "Matches the CT600 calculator (£40). Instant Quote uses £3 and the comparison calculator uses £6.",
+    display: "From £25/month",
+    amount: 25,
+    basis: "monthly",
+    source: "Set by Reckonwell, 22 Nov 2026 (replaces 'From £40/employee')",
+    consistentWithCalculator: true,
+    comment: "£4 per employee per month, minimum £25. Used by every calculator (src/lib/pricing/payroll.ts).",
   },
   {
     service: "R&D tax relief claim",

@@ -2,7 +2,9 @@
 
 **Source:** the original website source code supplied as `reckonwell-main` (files dated 5 October 2026). Its prices match the live site on 21 November 2026.
 **Code:** `src/lib/pricing/`. Every rule below is a pure function, with unit tests in `pricing.test.ts`.
-**Verification:** each port was compared with the original function extracted from `reckonwell-main`. The Instant Quote, CT600, comparison, Self Assessment and R&D fee calculators were each tested with 20,000 random inputs; MTD was tested with every possible input. **All outputs were identical.**
+**Verification:** each port was compared with the original function extracted from `reckonwell-main`. The Instant Quote, CT600, comparison, Self Assessment and R&D fee calculators were each tested with 20,000 random inputs; MTD was tested with every possible input. **All outputs were identical.** (This was before the approved payroll change, which now deliberately differs from the original in the Instant Quote, CT600 and comparison calculators.)
+
+> **Changes approved by Reckonwell:** payroll is £4 per employee per month with a £25 monthly minimum (22 Nov 2026). Everything else below is unchanged from the original source.
 
 > **Status: `recovered-unapproved`.** These are the prices the current site uses. Several contradict each other (§8). Until Reckonwell approves a single rulebook, the new site will show them as estimates. It will not send binding PDF quotations.
 
@@ -26,7 +28,7 @@
 | Item | Applies to | Price |
 | --- | --- | --- |
 | Bookkeeping | all | **£2 × transactions** per month |
-| Payroll | all | **£3 × employees** per month |
+| Payroll | all | **£4 × employees** per month, **minimum £25** *(changed 22 Nov 2026 — was £3 × employees)* |
 | Self Assessment | sole trader | **£200** one-off |
 | Final Accounts & CT600 | limited company | **£500** if monthly revenue < £1,000 · **£750** if £1,000–£10,000 · **£1,000** if > £10,000 · **× number of companies** for a group |
 | Director Self Assessment | limited company | **£200 per director** |
@@ -43,7 +45,7 @@
 1. **Base fee:** £150 · £300 if profit ≥ £250k or 6+ employees · £500 if profit ≥ £500k or 20+ employees · £750 if profit ≥ £1m
 2. **Monitoring:** annual ×1 · quarterly ×1.3 · monthly ×1.6 (rounded)
 3. **Transaction volume:** low (< 100/month) ×1 · medium (100–500) ×1.2 · high (> 500) ×1.5 (rounded)
-4. **Payroll:** £40 × headcount. The bands count as none = 0, 1–5 = 3, 6–20 = 13, 20+ = 25.
+4. **Payroll:** £4 × headcount, minimum £25 *(changed 22 Nov 2026 — was £40 × headcount)*. The bands count as none = 0, 1–5 = 3, 6–20 = 13, 20+ = 25.
 5. **Quarterly VAT returns:** +£60 when monitoring is quarterly or monthly
 6. **Add-ons:** management accounts +£100 · director salary planning **+£50, always added** · ongoing R&D relief +£200 · investor reporting +£100
 
@@ -79,7 +81,7 @@ Because the retainer is a range, it **must use the manual-pricing path** (an ack
 
 ## 6. Outsource vs hire comparison
 
-**Reckonwell side (monthly):** bookkeeping £2/transaction · **payroll £6/employee** · HR assistance £5/employee · VAT returns £150 per return ÷ 12 · senior-level analysis +£1,000 · fundraising & investor support +£1,000.
+**Reckonwell side (monthly):** bookkeeping £2/transaction · **payroll £4/employee, minimum £25** *(was £6/employee)* · HR assistance £5/employee · VAT returns £150 per return ÷ 12 · senior-level analysis +£1,000 · fundraising & investor support +£1,000.
 **One-off:** Self Assessment £200/person · Corporation Tax return £500 / £750 / £1,000 by monthly revenue (same bands as §1).
 
 **Hiring side (annual, fully loaded):** cost = gross salary + 15% employer NI above £5,000 + 3% pension.
@@ -104,7 +106,7 @@ Formula on `/r-and-d-tax-relief`: SME 20% of spend; large company 25% × (spend 
 | # | Topic | Conflict | Suggested question |
 | --- | --- | --- | --- |
 | 1 | **Final Accounts & CT600** | One-off £500/£750/£1,000 (Instant Quote, comparison) vs **monthly** package from £200 (CT600 calculator) | Are these two products (a standalone year-end vs an ongoing package), or should one replace the other? |
-| 2 | **Payroll** | £3 (Instant Quote) vs £6 (comparison) vs £40 per employee per month (CT600 calculator and published "From £40/employee") | Which rate is correct? Does it differ for standalone payroll vs a package? |
+| 2 | ~~**Payroll**~~ ✅ **Resolved 22 Nov 2026** | Was £3 / £6 / £40 per employee | Reckonwell set **£4 per employee per month, minimum £25**, applied in every calculator via `src/lib/pricing/payroll.ts` |
 | 3 | **R&D claim** | £300 + 5% success fee (Instant Quote) vs £850–£2,200 one-off (R&D fee calculator, published "From £850") | Is the £300 an application fee on top of a success fee, or out of date? |
 | 4 | **Making Tax Digital** | Published "From £34/month" vs calculator minimum £100/month vs "£300/month" in the MTD section copy | What is the starting price? |
 | 5 | **Limited company accounting** | Published "From £150/month" vs CT600 calculator minimum £200 (because the £50 salary planning is always added) | Should salary planning be optional? |
