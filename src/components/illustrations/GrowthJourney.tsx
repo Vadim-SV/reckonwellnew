@@ -1,7 +1,8 @@
 "use client";
 
+import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import { motion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export type JourneyStage = { title: string; text: string };
@@ -35,7 +36,7 @@ function Stage({ stage, index, count, progress }: { stage: JourneyStage; index: 
  */
 export function GrowthJourney({ stages, className }: { stages: JourneyStage[]; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.8", "end 0.55"] });
   const smooth = useSpring(scrollYProgress, { stiffness: 140, damping: 26, mass: 0.4 });
   const full = useTransform(smooth, () => 1);
@@ -49,10 +50,10 @@ export function GrowthJourney({ stages, className }: { stages: JourneyStage[]; c
         <motion.div className="h-full w-full origin-top bg-navy" style={{ scaleY: line }} />
       </div>
       {/* track + progress: horizontal (desktop) */}
-      <div aria-hidden className="absolute top-6 right-[12.5%] left-6 hidden h-px bg-navy/15 lg:block">
+      <div aria-hidden className="absolute top-6 left-6 hidden h-px bg-navy/15 lg:block" style={{ right: `calc(${100 / stages.length}% - 1.5rem)` }}>
         <motion.div className="h-full w-full origin-left bg-navy" style={{ scaleX: line }} />
       </div>
-      <ol className="relative grid lg:grid-cols-4">
+      <ol className="relative grid lg:[grid-template-columns:repeat(var(--stages),minmax(0,1fr))]" style={{ ["--stages" as string]: stages.length }}>
         {stages.map((s, i) => (
           <Stage key={s.title} stage={s} index={i} count={stages.length} progress={p} />
         ))}

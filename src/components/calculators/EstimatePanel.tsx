@@ -1,7 +1,8 @@
 "use client";
 
+import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import { useEffect, useRef } from "react";
-import { animate, useReducedMotion } from "motion/react";
+import { animate } from "motion/react";
 import type { Estimate } from "@/lib/pricing/registry";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +17,7 @@ const gbp = (n: number) =>
 function AnimatedAmount({ value, className }: { value: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const previous = useRef(value);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   useEffect(() => {
     const node = ref.current;
     if (!node) return;

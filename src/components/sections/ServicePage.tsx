@@ -47,7 +47,7 @@ export function ServicePage({ service }: { service: Service }) {
         lede={service.lede}
         primary={{ label: isScoping ? "Scope your requirements" : "Get your price", href: "#calculator" }}
         secondary={{ label: "Book a discovery call", href: "/book" }}
-        aside={heroIllustration && service.illustration ? <ServiceIllustration name={service.illustration} /> : <GoodFitCard items={service.goodFit} />}
+        aside={heroIllustration && service.illustration ? <ServiceIllustration name={service.illustration} depth /> : <GoodFitCard items={service.goodFit} />}
       />
 
       {service.explanation && (
@@ -64,6 +64,24 @@ export function ServicePage({ service }: { service: Service }) {
                 <GoodFitCard items={service.goodFit} />
               </Reveal>
             )}
+          </Container>
+        </Section>
+      )}
+
+      {!service.explanation && heroIllustration && (
+        <Section tone="cream" className="pt-0 sm:pt-0">
+          <Container>
+            <Reveal className="rounded-panel border border-hairline bg-white/70 p-7 shadow-card sm:p-9">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">A good fit if</p>
+              <ul className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+                {service.goodFit.map((g) => (
+                  <li key={g} className="flex gap-3 leading-relaxed text-ink">
+                    <Check className="mt-1 size-4 shrink-0 text-positive" aria-hidden />
+                    {g}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </Container>
         </Section>
       )}

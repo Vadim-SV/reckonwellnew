@@ -8,6 +8,7 @@ import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { TrustStrip } from "@/components/trust/TrustStrip";
 import { BooksDashboard } from "@/components/illustrations/BooksDashboard";
+import { FinanceWorkflow } from "@/components/illustrations/FinanceWorkflow";
 import { CalculatorSection } from "@/components/calculators/CalculatorSection";
 import { LinkCard } from "@/components/sections/Cards";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -77,7 +78,7 @@ const faqs = [
   {
     question: "Do we have to replace our current finance team?",
     answer:
-      "No. Most of our clients keep their finance manager or finance director and hand us the volume work. Others ask us to act as their whole finance function. We work alongside whoever you already have.",
+      "No. Most of our clients keep their finance manager or finance director and hand us the volume work. Others ask us to look after all of it. We work alongside whoever you already have.",
   },
   {
     question: "How long does it take to hand over?",
@@ -188,7 +189,7 @@ export default function HomePage() {
             <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">Give us the books. Keep the control.</h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/75">
               We work in your accounting software, follow your approval rules and report to whoever you choose. You
-              decide what to hand over — one task or the whole finance function.
+              decide what to hand over — one task or all of it.
             </p>
             <div className="mt-10">
               <ButtonLink href="/outsourced-financial-operations" variant="light">
@@ -225,7 +226,7 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.1} className="space-y-5 text-lg leading-relaxed">
             <p>
-              Many of our clients already have a finance manager or finance director. What they lack is capacity for
+              Many of our clients already have a finance manager or finance director. What they lack is time for
               the daily work that keeps the numbers right.
             </p>
             <p>
@@ -236,8 +237,26 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      {/* Monthly workflow (scroll-driven) */}
+      <Section tone="mist" aria-labelledby="workflow-title">
+        <Container>
+          <Reveal className="max-w-2xl">
+            <Eyebrow>Every month</Eyebrow>
+            <h2 id="workflow-title" className="mt-4 text-4xl leading-tight sm:text-5xl">
+              What happens to your books each month
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed">
+              A steady routine, not a scramble at year-end. Scroll through a typical month.
+            </p>
+          </Reveal>
+          <div className="mt-6 lg:mt-12">
+            <FinanceWorkflow />
+          </div>
+        </Container>
+      </Section>
+
       {/* How it works */}
-      <Section tone="mist">
+      <Section tone="cream">
         <Container>
           <Reveal className="max-w-2xl">
             <Eyebrow>How it works</Eyebrow>
@@ -271,7 +290,7 @@ export default function HomePage() {
           <Reveal className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
               <Eyebrow>Services</Eyebrow>
-              <h2 className="mt-4 text-4xl sm:text-5xl">Everything your finance function needs.</h2>
+              <h2 className="mt-4 text-4xl sm:text-5xl">Everything your finance team needs.</h2>
             </div>
             <ButtonLink href="/services" variant="secondary">
               All services

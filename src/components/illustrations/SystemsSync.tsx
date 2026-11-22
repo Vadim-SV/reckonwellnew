@@ -14,7 +14,7 @@ const centre = { x: 50, y: 48 };
 
 /** Connected apps send data into the accounting ledger; links light up as they sync. */
 export function SystemsSync() {
-  const { ref, step, reduce } = useLoopStep(apps.length, 800);
+  const { ref, step, reduce, inView } = useLoopStep(apps.length, 800);
 
   return (
     <div
@@ -40,20 +40,29 @@ export function SystemsSync() {
                 style={{ transition: "stroke 0.5s" }}
               />
             ))}
+            {/* Data pulses travel along connected links (SVG dash offset: paint only, no layout). */}
+            {!reduce &&
+              inView &&
+              apps.map((a, i) =>
+                i < step ? (
+                  <motion.line
+                    key={`pulse-${a.name}`}
+                    x1={a.x}
+                    y1={a.y}
+                    x2={centre.x}
+                    y2={centre.y}
+                    pathLength={1}
+                    stroke="var(--color-steel)"
+                    strokeWidth={2.2}
+                    strokeLinecap="round"
+                    strokeDasharray="0.06 1"
+                    initial={{ strokeDashoffset: 0.06 }}
+                    animate={{ strokeDashoffset: -1 }}
+                    transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
+                  />
+                ) : null,
+              )}
           </svg>
-          {!reduce &&
-            apps.map((a, i) =>
-              i < step ? (
-                <motion.span
-                  key={`dot-${a.name}`}
-                  aria-hidden
-                  className="absolute size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-steel"
-                  initial={{ left: `${a.x}%`, top: `${a.y}%`, opacity: 0 }}
-                  animate={{ left: [`${a.x}%`, `${centre.x}%`], top: [`${a.y}%`, `${centre.y}%`], opacity: [0, 1, 0] }}
-                  transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
-                />
-              ) : null,
-            )}
           {apps.map((a, i) => (
             <div
               key={a.name}

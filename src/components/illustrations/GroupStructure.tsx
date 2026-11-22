@@ -1,7 +1,8 @@
 "use client";
 
+import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import { motion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
 
 const subsidiaries = [
   { name: "Retail Ltd", revenue: 412000, cash: 96000 },
@@ -42,7 +43,7 @@ function Counter({ value, progress }: { value: number; progress: MotionValue<num
  */
 export function GroupStructure() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.9", "center 0.6"] });
   const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.4 });
   const full = useTransform(smooth, () => 1);

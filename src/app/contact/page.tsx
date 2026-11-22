@@ -15,7 +15,7 @@ export default function ContactPage() {
         crumbs={[{ label: "Contact", href: "/contact" }]}
         eyebrow="Contact"
         title="Let's talk about your finance team."
-        lede="Tell us where your finance function is stretched and what you'd like to hand over. We'll come back to you to arrange a short call."
+        lede="Tell us where your finance team is stretched and what you'd like to hand over. We'll come back to you to arrange a short call."
       />
       <ContactSection source="contact" tone="sand" />
     </>

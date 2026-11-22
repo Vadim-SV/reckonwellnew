@@ -1,7 +1,8 @@
 "use client";
 
+import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,7 +13,7 @@ import { cn } from "@/lib/utils";
 export function useLoopStep(steps: number, intervalMs = 1100) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.35 });
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [step, setStep] = useState(0);
 
   useEffect(() => {

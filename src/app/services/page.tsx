@@ -21,8 +21,8 @@ export default function ServicesPage() {
       <PageHero
         crumbs={[{ label: "Services", href: "/services" }]}
         eyebrow="Services"
-        title="Everything your finance function needs."
-        lede="Take one service or hand us the whole finance function. Every service has its own calculator or requirements tool, so you can see what's involved before we speak."
+        title="Everything your finance team needs."
+        lede="Take one service or hand us all of your day-to-day finance work. Every service has its own calculator or requirements tool, so you can see what's involved before we speak."
         primary={{ label: "Get an instant quote", href: "/instant-quote" }}
         secondary={{ label: "Talk to us", href: "/contact" }}
       />

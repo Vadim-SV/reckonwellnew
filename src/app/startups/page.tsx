@@ -33,10 +33,11 @@ const launchIncludes = [
 ];
 
 const journey = [
-  { title: "Startup", text: "Software, bank feeds and invoicing set up properly, so good habits start early." },
-  { title: "Growing business", text: "Regular bookkeeping, VAT and payroll as customers and staff arrive." },
-  { title: "Established company", text: "Monthly management accounts and a finance team without the hiring." },
-  { title: "Group of companies", text: "Consistent books and reporting as you add new companies." },
+  { title: "Starting a business", text: "We talk through your plans and the structure that suits you." },
+  { title: "Setting up accounting", text: "Software, bank feeds and invoicing set up properly, so good habits start early." },
+  { title: "Growing operations", text: "Regular bookkeeping, VAT and payroll as customers and staff arrive." },
+  { title: "Monthly reporting", text: "Clear monthly numbers, so you can make decisions with confidence." },
+  { title: "Multiple companies", text: "Consistent books and reporting as you add new companies." },
 ];
 
 const steps = [

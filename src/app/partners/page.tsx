@@ -4,6 +4,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { PartnerForm } from "@/components/forms/PartnerForm";
+import { GrowthJourney } from "@/components/illustrations/GrowthJourney";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
 
@@ -25,7 +26,7 @@ const audiences = [
   },
   {
     title: "Business consultants",
-    text: "When you see a client's finance function struggling, introduce us to fix the day-to-day while you focus on the bigger picture.",
+    text: "When you see a client's finance team struggling, introduce us to fix the day-to-day while you focus on the bigger picture.",
   },
   {
     title: "Professional introducers",
@@ -37,11 +38,11 @@ const audiences = [
   },
 ];
 
-const steps = [
-  { title: "Send us an enquiry", text: "Use the form below. We review every enquiry personally and arrange a short call." },
-  { title: "Agree how we'll work", text: "Referral, collaboration or capacity — we agree a simple arrangement that suits your clients." },
-  { title: "Introduce a client", text: "A warm email is all it takes. We handle the discovery call, proposal and onboarding." },
-  { title: "We look after them", text: "Your client gets reliable monthly finance support, and you're kept informed as agreed." },
+const journey = [
+  { title: "Professional partner", text: "You send us an enquiry and we agree a simple way of working together." },
+  { title: "Client introduction", text: "A warm email is all it takes. We handle the call, proposal and onboarding." },
+  { title: "Reckonwell support", text: "Your client gets reliable monthly finance support, and you're kept informed as agreed." },
+  { title: "Ongoing relationship", text: "For referrals, 10% of the net monthly fee is paid to you each month while the client stays." },
 ];
 
 const faqs = [
@@ -107,19 +108,9 @@ export default function PartnersPage() {
         <Container>
           <Reveal className="max-w-2xl">
             <Eyebrow>How it works</Eyebrow>
-            <h2 className="mt-4 text-4xl sm:text-5xl">Simple from the first conversation</h2>
+            <h2 className="mt-4 text-4xl sm:text-5xl">From introduction to a lasting relationship</h2>
           </Reveal>
-          <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.08}>
-                <li className="h-full border-t-2 border-navy pt-6">
-                  <span className="tabular font-display text-4xl text-navy">{i + 1}</span>
-                  <h3 className="mt-3 text-xl">{s.title}</h3>
-                  <p className="mt-2 leading-relaxed">{s.text}</p>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
+          <GrowthJourney stages={journey} className="mt-14" />
         </Container>
       </Section>
 

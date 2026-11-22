@@ -7,6 +7,14 @@ export type Faq = { question: string; answer: string };
 export type ServiceTool = { kind: "calculator"; key: CalculatorKey } | { kind: "scoping"; key: ScopingKey };
 
 export type IllustrationKey =
+  | "bookkeeping"
+  | "finance-team"
+  | "payroll"
+  | "vat"
+  | "annual-accounts"
+  | "self-assessment"
+  | "mtd"
+  | "rd"
   | "accounts-payable"
   | "credit-control"
   | "management-accounts"
@@ -58,7 +66,7 @@ const coreServices: Service[] = [
     href: "/outsourced-financial-operations",
     name: "Outsourced finance team",
     category: "operations",
-    summary: "Your day-to-day finance function, run by us — without adding to headcount.",
+    summary: "We run your day-to-day finance work, so you don't need to hire.",
     eyebrow: "Outsourced financial operations",
     title: "Your finance team, without the hiring.",
     lede: "When the finance workload outgrows the people you have, you don't have to recruit. We take on the bookkeeping, payables, receivables, payroll and monthly reporting, and work alongside anyone you already have.",
@@ -66,6 +74,7 @@ const coreServices: Service[] = [
     metaDescription:
       "Extend your finance team without hiring. Reckonwell runs bookkeeping, accounts payable, credit control, payroll and monthly management accounts for established UK companies.",
     tool: { kind: "calculator", key: "finance-team" },
+    illustration: "finance-team",
     calculatorTitle: "What would it cost to hire instead?",
     calculatorIntro:
       "Choose the work you need covered. We'll show our indicative monthly fee next to the cost of employing people to do it.",
@@ -83,12 +92,12 @@ const coreServices: Service[] = [
       "Your finance director or manager needs the routine work taken off their desk",
       "You want reliable monthly numbers instead of waiting for year-end",
     ],
-    steps: onboardingSteps("your finance function"),
+    steps: onboardingSteps("your finance work"),
     faqs: [
       {
         question: "Do we have to replace our current team?",
         answer:
-          "No. Most clients keep their finance manager or finance director and hand us the volume work — bookkeeping, payables, receivables and payroll. Others ask us to act as their whole finance function. We fit around what you already have.",
+          "No. Most clients keep their finance manager or finance director and hand us the volume work — bookkeeping, payables, receivables and payroll. Others ask us to look after all of it. We fit around what you already have.",
       },
       {
         question: "How is this different from using an accountant at year-end?",
@@ -120,6 +129,7 @@ const coreServices: Service[] = [
     metaDescription:
       "Outsourced bookkeeping for UK businesses: transactions coded, bank accounts reconciled and records kept up to date in Xero or QuickBooks. Get an instant estimate.",
     tool: { kind: "calculator", key: "bookkeeping" },
+    illustration: "bookkeeping",
     calculatorTitle: "Estimate your bookkeeping fee",
     calculatorIntro:
       "Bookkeeping is priced on the number of transactions you have each month. If your books are behind, we can bring them up to date first.",
@@ -170,6 +180,7 @@ const coreServices: Service[] = [
     metaDescription:
       "Outsourced payroll for UK businesses: monthly payroll, payslips, RTI submissions, pension auto-enrolment, starters and leavers. Get an instant estimate.",
     tool: { kind: "calculator", key: "payroll" },
+    illustration: "payroll",
     calculatorTitle: "Estimate your payroll fee",
     calculatorIntro: "Payroll is £4 per employee per month, from £25 a month.",
     includes: [
@@ -213,6 +224,7 @@ const coreServices: Service[] = [
     metaDescription:
       "VAT returns prepared, reviewed and filed with HMRC under Making Tax Digital, plus help with VAT registration. Get an instant estimate.",
     tool: { kind: "calculator", key: "vat" },
+    illustration: "vat",
     calculatorTitle: "Estimate your VAT fee",
     calculatorIntro: "VAT returns are priced per return. Most businesses file four a year.",
     includes: [
@@ -259,9 +271,10 @@ const coreServices: Service[] = [
     metaDescription:
       "Statutory year-end accounts and CT600 Corporation Tax returns for UK limited companies, prepared and filed on time. Get an instant estimate.",
     tool: { kind: "calculator", key: "annual-accounts" },
+    illustration: "annual-accounts",
     calculatorTitle: "Estimate your monthly fee",
     calculatorIntro:
-      "The fee depends on your profit, your headcount and how closely you'd like us to keep an eye on your position during the year.",
+      "The fee depends on your profit, your number of staff and how closely you'd like us to keep an eye on your position during the year.",
     includes: [
       { title: "Statutory accounts", text: "Year-end accounts prepared to FRS 102 or FRS 105 and filed at Companies House." },
       { title: "CT600 return", text: "Your Corporation Tax return prepared and submitted to HMRC, with the tax computation." },
@@ -313,6 +326,7 @@ const coreServices: Service[] = [
     metaDescription:
       "Self Assessment tax returns for directors, sole traders, freelancers and landlords, with optional monthly monitoring and MTD support. Get an instant estimate.",
     tool: { kind: "calculator", key: "self-assessment" },
+    illustration: "self-assessment",
     calculatorTitle: "Estimate your Self Assessment fee",
     calculatorIntro:
       "The price depends on your income, whether you have rental income and how closely you'd like us to monitor your position.",
@@ -355,6 +369,7 @@ const coreServices: Service[] = [
     metaDescription:
       "Making Tax Digital for Income Tax support for sole traders and landlords: digital records, quarterly updates and the final declaration. Get an instant estimate.",
     tool: { kind: "calculator", key: "mtd" },
+    illustration: "mtd",
     calculatorTitle: "Estimate your MTD fee",
     calculatorIntro: "Choose how much support you'd like. Landlords with several properties pay a little more.",
     includes: [
@@ -396,6 +411,7 @@ const coreServices: Service[] = [
     metaDescription:
       "R&D tax relief claims for UK companies: qualifying spend identified, technical narrative written and claim filed with HMRC. Get an instant fee estimate.",
     tool: { kind: "calculator", key: "rd-fee" },
+    illustration: "rd",
     calculatorTitle: "Estimate the fee for your claim",
     calculatorIntro:
       "Claims are priced on your annual R&D spend. Companies with ongoing R&D can choose a monthly retainer instead.",
@@ -462,7 +478,7 @@ export const services: Service[] = [...coreServices, ...operationsServices].sort
 export const serviceBySlug = (slug: string) => services.find((s) => s.slug === slug);
 
 export const serviceGroups = [
-  { key: "operations", title: "Financial operations", text: "Ongoing monthly work that keeps your finance function running." },
+  { key: "operations", title: "Financial operations", text: "Ongoing monthly work that keeps your finances running smoothly." },
   { key: "compliance", title: "Accounting & compliance", text: "Returns and filings, on their own or alongside ongoing support." },
   { key: "support", title: "Business support", text: "Help with systems, group structures and getting started." },
 ] as const;

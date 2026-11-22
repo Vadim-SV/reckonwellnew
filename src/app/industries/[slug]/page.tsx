@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
+import { IndustryVisual } from "@/components/illustrations/IndustryVisuals";
 import { LinkCard } from "@/components/sections/Cards";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -48,19 +49,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         lede={ind.lede}
         primary={{ label: "Talk to us", href: "#get-in-touch" }}
         secondary={{ label: "See our services", href: "#services" }}
-        aside={
-          <div className="rounded-panel bg-navy p-7 text-cream shadow-float">
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">What we handle for you</p>
-            <ul className="mt-5 space-y-3.5">
-              {ind.weHandle.map((w) => (
-                <li key={w} className="flex gap-3 leading-relaxed">
-                  <Check className="mt-1 size-4 shrink-0 text-steel-light" aria-hidden />
-                  {w}
-                </li>
-              ))}
-            </ul>
-          </div>
-        }
+        aside={<IndustryVisual slug={ind.slug} />}
       />
 
       <Section tone="cream" className="pt-0 sm:pt-0">
@@ -69,13 +58,26 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <Eyebrow>The finance challenges</Eyebrow>
             <h2 className="mt-4 text-4xl sm:text-5xl">What makes {ind.name.toLowerCase()} finance different</h2>
           </Reveal>
-          <div className="mt-12 grid gap-px overflow-hidden rounded-panel border border-hairline bg-[var(--border)] sm:grid-cols-2">
-            {ind.challenges.map((c, i) => (
-              <Reveal key={c.title} delay={(i % 2) * 0.06} className="bg-cream p-8">
-                <h3 className="text-2xl">{c.title}</h3>
-                <p className="mt-3 leading-relaxed">{c.text}</p>
-              </Reveal>
-            ))}
+          <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+            <div className="grid gap-px overflow-hidden rounded-panel border border-hairline bg-[var(--border)] sm:grid-cols-2">
+              {ind.challenges.map((c, i) => (
+                <Reveal key={c.title} delay={(i % 2) * 0.06} className="bg-cream p-8">
+                  <h3 className="text-2xl">{c.title}</h3>
+                  <p className="mt-3 leading-relaxed">{c.text}</p>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal delay={0.1} className="rounded-panel bg-navy p-7 text-cream shadow-float">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">What we handle for you</p>
+              <ul className="mt-5 space-y-3.5">
+                {ind.weHandle.map((w) => (
+                  <li key={w} className="flex gap-3 leading-relaxed">
+                    <Check className="mt-1 size-4 shrink-0 text-steel-light" aria-hidden />
+                    {w}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </Container>
       </Section>

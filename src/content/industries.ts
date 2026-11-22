@@ -27,7 +27,7 @@ export const industries: Industry[] = [
   {
     slug: "technology",
     name: "Technology",
-    summary: "Recurring revenue, deferred income, R&D and investor-ready reporting.",
+    summary: "Recurring revenue, R&D claims and clear reports for investors.",
     title: "Finance support for technology and SaaS companies.",
     lede: "Subscription revenue, development costs and investor reporting make technology finance more involved than it looks. We keep the books accurate every month so your MRR, margins and runway are numbers you can trust.",
     metaTitle: "Accountants for Technology & SaaS Companies",
@@ -37,7 +37,7 @@ export const industries: Industry[] = [
       { title: "Revenue that isn't cash", text: "Annual subscriptions paid up front have to be spread across the months they cover, or your profit is overstated." },
       { title: "Investor and board reporting", text: "Monthly packs with burn, runway and SaaS metrics need clean, consistent books behind them." },
       { title: "R&D tax relief", text: "Development costs may qualify for relief, but only with the right records and a defensible claim." },
-      { title: "Growing headcount", text: "Payroll, contractors and share schemes add admin quickly as the team grows." },
+      { title: "A growing team", text: "Payroll, contractors and share schemes add admin quickly as the team grows." },
     ],
     weHandle: [
       "Deferred income and revenue recognition",
