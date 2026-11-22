@@ -278,3 +278,45 @@ export function RangeField({
 
 export const compactGBP = (n: number) =>
   n >= 1_000_000 ? `£${(n / 1_000_000).toFixed(n % 1_000_000 ? 1 : 0)}m` : n >= 1_000 ? `£${Math.round(n / 1_000)}k` : `£${n}`;
+
+/** Accessible multi-select rendered as selectable chips. */
+export function CheckboxGroup<T extends string>({
+  label,
+  hint,
+  values,
+  options,
+  onChange,
+}: {
+  label: string;
+  hint?: string;
+  values: T[];
+  options: { value: T; label: string }[];
+  onChange: (v: T[]) => void;
+}) {
+  return (
+    <Field label={label} hint={hint} as="fieldset">
+      <div className="flex flex-wrap gap-2">
+        {options.map((o) => {
+          const checked = values.includes(o.value);
+          return (
+            <label
+              key={o.value}
+              className={cn(
+                "cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors",
+                checked ? "border-navy bg-navy text-cream" : "border-hairline bg-white text-ink hover:border-navy/40",
+              )}
+            >
+              <input
+                type="checkbox"
+                className="sr-only"
+                checked={checked}
+                onChange={() => onChange(checked ? values.filter((v) => v !== o.value) : [...values, o.value])}
+              />
+              {o.label}
+            </label>
+          );
+        })}
+      </div>
+    </Field>
+  );
+}

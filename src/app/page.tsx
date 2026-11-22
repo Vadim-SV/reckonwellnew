@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -43,13 +44,14 @@ const hiringProblems = [
 
 const handover = [
   { area: "Bookkeeping & bank reconciliations", href: "/bookkeeping-services" },
-  { area: "Accounts payable & supplier payment runs", href: "/outsourced-financial-operations" },
-  { area: "Invoicing & credit control", href: "/outsourced-financial-operations" },
+  { area: "Accounts payable & supplier payment runs", href: "/services/accounts-payable" },
+  { area: "Invoicing & credit control", href: "/services/credit-control" },
   { area: "Payroll, RTI & pensions", href: "/payroll-services" },
   { area: "VAT returns", href: "/vat-returns" },
-  { area: "Monthly management accounts", href: "/outsourced-financial-operations" },
+  { area: "Monthly management accounts", href: "/services/management-accounts" },
+  { area: "Month-end close", href: "/services/month-end-close" },
   { area: "Year-end accounts & Corporation Tax", href: "/annual-accounts-ct600" },
-  { area: "Group and multi-entity accounting", href: "/outsourced-financial-operations" },
+  { area: "Group and multi-entity accounting", href: "/services/group-companies" },
 ];
 
 const steps = [
@@ -97,6 +99,20 @@ const faqs = [
       "A named contact who knows your business. You can reach us by email or phone, and you won't be passed around a call centre.",
   },
 ];
+
+// Homepage prioritises ongoing financial operations; compliance lives on /services.
+const homepageServices = [
+  "outsourced-financial-operations",
+  "bookkeeping-services",
+  "accounts-payable",
+  "credit-control",
+  "management-accounts",
+  "month-end-close",
+  "payroll-services",
+  "group-companies",
+]
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter((s): s is (typeof services)[number] => Boolean(s));
 
 export default function HomePage() {
   return (
@@ -184,13 +200,13 @@ export default function HomePage() {
             <ul className="divide-y divide-cream/10 border-y border-cream/10">
               {handover.map((h) => (
                 <li key={h.area}>
-                  <a href={h.href} className="group flex items-center justify-between gap-4 py-4 text-lg text-cream">
+                  <Link href={h.href} className="group flex items-center justify-between gap-4 py-4 text-lg text-cream">
                     {h.area}
                     <ArrowRight
                       className="size-4 shrink-0 text-cream/40 transition-transform group-hover:translate-x-1 group-hover:text-cream"
                       aria-hidden
                     />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -262,17 +278,28 @@ export default function HomePage() {
             </ButtonLink>
           </Reveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s, i) => (
+            {homepageServices.map((s, i) => (
               <Reveal key={s.slug} delay={(i % 4) * 0.05}>
                 <LinkCard
-                  href={`/${s.slug}`}
+                  href={s.href}
                   title={s.name}
                   text={s.summary}
-                  meta={s.category === "operations" ? "Financial operations" : "Compliance"}
+                  meta={s.category === "operations" ? "Financial operations" : s.category === "support" ? "Business support" : "Compliance"}
                 />
               </Reveal>
             ))}
           </div>
+          <p className="mt-8 text-[15px] text-muted">
+            Just starting out?{" "}
+            <Link href="/startups" className="text-steel underline underline-offset-4 hover:text-navy">
+              See our Founder&apos;s Launch Offer
+            </Link>
+            . Need a single return?{" "}
+            <Link href="/services" className="text-steel underline underline-offset-4 hover:text-navy">
+              View accounting &amp; compliance services
+            </Link>
+            .
+          </p>
         </Container>
       </Section>
 

@@ -85,11 +85,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <Reveal className="max-w-2xl">
             <Eyebrow>Services</Eyebrow>
             <h2 className="mt-4 text-4xl sm:text-5xl">Most useful for {ind.name.toLowerCase()} businesses</h2>
-            <p className="mt-4 text-lg">Each service page has an instant price calculator.</p>
+            <p className="mt-4 text-lg">Each service page has a calculator or requirements tool.</p>
           </Reveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {related.map((s) => (
-              <LinkCard key={s.slug} href={`/${s.slug}#calculator`} title={s.name} text={s.summary} meta="Get a price" />
+              <LinkCard key={s.slug} href={`${s.href}#calculator`} title={s.name} text={s.summary} meta={s.tool.kind === "calculator" ? "Get a price" : "Scope your needs"} />
             ))}
           </div>
         </Container>

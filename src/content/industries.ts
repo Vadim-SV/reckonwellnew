@@ -47,7 +47,7 @@ export const industries: Industry[] = [
       "R&D tax relief claims",
       "Year-end accounts and CT600",
     ],
-    services: ["outsourced-financial-operations", "bookkeeping-services", "r-and-d-tax-relief", "annual-accounts-ct600"],
+    services: ["management-accounts", "outsourced-financial-operations", "r-and-d-tax-relief", "credit-control"],
     faqs: faqsFor("technology"),
   },
   {
@@ -73,7 +73,7 @@ export const industries: Industry[] = [
       "Channel-level management reporting",
       "Supplier payments and import costs",
     ],
-    services: ["bookkeeping-services", "vat-returns", "outsourced-financial-operations", "annual-accounts-ct600"],
+    services: ["bookkeeping-services", "accounting-systems", "vat-returns", "accounts-payable"],
     faqs: faqsFor("ecommerce"),
   },
   {
@@ -99,7 +99,7 @@ export const industries: Industry[] = [
       "MTD for Income Tax quarterly updates",
       "Portfolio-level reporting",
     ],
-    services: ["bookkeeping-services", "making-tax-digital", "annual-accounts-ct600", "self-assessment"],
+    services: ["group-companies", "bookkeeping-services", "making-tax-digital", "annual-accounts-ct600"],
     faqs: faqsFor("property"),
   },
   {
@@ -125,7 +125,7 @@ export const industries: Industry[] = [
       "Capital allowances and R&D claims",
       "Monthly management accounts",
     ],
-    services: ["outsourced-financial-operations", "bookkeeping-services", "r-and-d-tax-relief", "annual-accounts-ct600"],
+    services: ["accounts-payable", "credit-control", "management-accounts", "r-and-d-tax-relief"],
     faqs: faqsFor("manufacturing"),
   },
   {
@@ -151,7 +151,7 @@ export const industries: Industry[] = [
       "Site-by-site cost reporting",
       "Year-end accounts",
     ],
-    services: ["bookkeeping-services", "payroll-services", "vat-returns", "outsourced-financial-operations"],
+    services: ["bookkeeping-services", "payroll-services", "accounts-payable", "vat-returns"],
     faqs: faqsFor("hospitality"),
   },
 ];

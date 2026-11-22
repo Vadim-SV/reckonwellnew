@@ -5,11 +5,12 @@ import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { contactSchema, fieldErrors } from "@/lib/forms/schemas";
 import type { CalculatorKey } from "@/lib/pricing/registry";
+import type { ScopingKey } from "@/lib/scoping/registry";
 import { Consent, Honeypot, TextArea, TextField } from "./inputs";
 
 type Props = {
   source: string;
-  calculator?: { key: CalculatorKey; inputs: Record<string, unknown> };
+  calculator?: { key: CalculatorKey | ScopingKey; inputs: Record<string, unknown> };
   submitLabel?: string;
   messagePlaceholder?: string;
 };
@@ -63,7 +64,7 @@ export function EnquiryForm({ source, calculator, submitLabel = "Send enquiry", 
         <h3 className="mt-4 text-2xl">Thank you — we&apos;ve got your details.</h3>
         <p className="mx-auto mt-3 max-w-md text-body">
           We&apos;ve sent a confirmation to {values.email}
-          {calculator ? " with a copy of your estimate" : ""}. We&apos;ll be in touch shortly.
+          {calculator ? " with a copy of your details" : ""}. We&apos;ll be in touch shortly.
         </p>
       </div>
     );

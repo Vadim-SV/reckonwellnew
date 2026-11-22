@@ -1,4 +1,5 @@
 import type { Estimate } from "@/lib/pricing/registry";
+import type { ScopeSummary } from "@/lib/scoping/registry";
 import type { ContactInput, PartnerInput } from "@/lib/forms/schemas";
 import { site } from "@/lib/site";
 
@@ -57,6 +58,19 @@ function estimateTable(e: Estimate): string {
 ${e.notes.map((n) => `<p style="margin:6px 0;font-size:13px;color:#66605c;">${escapeHtml(n)}</p>`).join("")}`;
 }
 
+function scopeBlock(s: ScopeSummary): string {
+  const items = s.items
+    .map(
+      (i) => `<tr><td style="padding:6px 12px 6px 0;color:#66605c;vertical-align:top;border-bottom:1px solid #eee;">${escapeHtml(i.label)}</td><td style="padding:6px 0;border-bottom:1px solid #eee;">${escapeHtml(i.value)}</td></tr>`,
+    )
+    .join("");
+  return `<p style="margin:12px 0 6px;font-size:16px;color:#12233f;">${escapeHtml(s.headline)}</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;margin:6px 0 12px;">${items}</table>
+<p style="margin:12px 0 4px;font-weight:bold;color:#12233f;font-size:14px;">What we'd look after</p>
+<ul style="margin:0 0 12px;padding-left:20px;font-size:14px;">${s.focus.map((f) => `<li style="margin:3px 0;">${escapeHtml(f)}</li>`).join("")}</ul>
+<p style="margin:6px 0;font-size:13px;color:#66605c;">${escapeHtml(s.pricingNote)}</p>`;
+}
+
 const row = (label: string, value: string) =>
   value
     ? `<tr><td style="padding:4px 12px 4px 0;color:#66605c;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:4px 0;">${escapeHtml(value)}</td></tr>`
@@ -66,9 +80,10 @@ export function enquiryInternalEmail(args: {
   contact: ContactInput;
   sourceLabel: string;
   estimate?: Estimate;
+  scope?: ScopeSummary;
   calculatorInputs?: unknown;
 }): { subject: string; html: string } {
-  const { contact, sourceLabel, estimate } = args;
+  const { contact, sourceLabel, estimate, scope } = args;
   const subject = `New enquiry — ${sourceLabel} — ${contact.name}${contact.company ? ` (${contact.company})` : ""}`;
   const body = `<h1 style="font-size:20px;color:#12233f;margin:0 0 16px;">New website enquiry</h1>
 <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:14px;">
@@ -76,6 +91,7 @@ ${row("Page", sourceLabel)}${row("Name", contact.name)}${row("Email", contact.em
 </table>
 ${contact.message ? `<h2 style="font-size:15px;color:#12233f;margin:20px 0 6px;">Message</h2><p style="white-space:pre-wrap;margin:0;">${escapeHtml(contact.message)}</p>` : ""}
 ${estimate ? `<h2 style="font-size:15px;color:#12233f;margin:20px 0 6px;">Calculator estimate (recalculated on the server)</h2>${estimateTable(estimate)}${estimate.manualPricing ? '<p style="color:#8c3d2b;font-size:13px;">Needs manual pricing — the customer was sent an acknowledgement only.</p>' : ""}` : ""}
+${scope ? `<h2 style="font-size:15px;color:#12233f;margin:20px 0 6px;">Scoping answers (validated on the server)</h2>${scopeBlock(scope)}` : ""}
 ${args.calculatorInputs ? `<h2 style="font-size:15px;color:#12233f;margin:20px 0 6px;">Calculator inputs</h2><pre style="font-size:12px;background:#f6e9d8;padding:12px;white-space:pre-wrap;">${escapeHtml(JSON.stringify(args.calculatorInputs, null, 2))}</pre>` : ""}`;
   return { subject, html: layout(subject, body) };
 }
@@ -84,8 +100,9 @@ export function enquiryAcknowledgementEmail(args: {
   contact: ContactInput;
   sourceLabel: string;
   estimate?: Estimate;
+  scope?: ScopeSummary;
 }): { subject: string; html: string } {
-  const { contact, estimate } = args;
+  const { contact, estimate, scope } = args;
   const firstName = contact.name.split(" ")[0];
   const subject = "Thanks for getting in touch — Reckonwell";
   const estimateBlock =
@@ -93,7 +110,9 @@ export function enquiryAcknowledgementEmail(args: {
       ? `<p>For reference, here is the indicative estimate you saw on our website for <strong>${escapeHtml(args.sourceLabel)}</strong>:</p>${estimateTable(estimate)}`
       : estimate?.manualPricing
         ? `<p>This service is priced individually, so we'll confirm the fee once we understand a little more about your business.</p>`
-        : "";
+        : scope
+          ? `<p>Here's a summary of what you told us about <strong>${escapeHtml(args.sourceLabel)}</strong>. We'll use it to prepare a tailored quote:</p>${scopeBlock(scope)}`
+          : "";
   const body = `<p style="margin-top:0;">Hello ${escapeHtml(firstName)},</p>
 <p>Thank you for your enquiry. We've received your details and someone from our team will be in touch shortly.</p>
 ${estimateBlock}

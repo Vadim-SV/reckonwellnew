@@ -1,11 +1,25 @@
 import type { CalculatorKey } from "@/lib/pricing/registry";
+import type { ScopingKey } from "@/lib/scoping/registry";
+import { operationsServices } from "./services-operations";
 
 export type Faq = { question: string; answer: string };
 
+export type ServiceTool = { kind: "calculator"; key: CalculatorKey } | { kind: "scoping"; key: ScopingKey };
+
+export type IllustrationKey =
+  | "accounts-payable"
+  | "credit-control"
+  | "management-accounts"
+  | "month-end-close"
+  | "accounting-systems"
+  | "group-companies";
+
 export type Service = {
   slug: string;
+  /** Public URL. Original services keep their existing root-level URLs. */
+  href: string;
   name: string;
-  category: "operations" | "compliance";
+  category: "operations" | "compliance" | "support";
   /** One line for cards and menus. */
   summary: string;
   eyebrow: string;
@@ -13,7 +27,8 @@ export type Service = {
   lede: string;
   metaTitle: string;
   metaDescription: string;
-  calculator: CalculatorKey;
+  /** Price calculator (approved/recovered pricing) or requirements tool (no pricing). */
+  tool: ServiceTool;
   calculatorTitle: string;
   calculatorIntro: string;
   includes: { title: string; text: string }[];
@@ -21,6 +36,13 @@ export type Service = {
   steps: { title: string; text: string }[];
   faqs: Faq[];
   related: string[];
+  /** Optional richer sections used by the newer service pages. */
+  explanation?: string[];
+  benefits?: { title: string; text: string }[];
+  illustration?: IllustrationKey;
+  /** "section": a scroll-driven illustration shown in its own section instead of the hero. */
+  illustrationPlacement?: "hero" | "section";
+  illustrationTitle?: string;
 };
 
 const onboardingSteps = (service: string): Service["steps"] => [
@@ -30,9 +52,10 @@ const onboardingSteps = (service: string): Service["steps"] => [
   { title: "Work carries on every month", text: "You get regular updates, quick answers and the confidence that deadlines are covered." },
 ];
 
-export const services: Service[] = [
+const coreServices: Service[] = [
   {
     slug: "outsourced-financial-operations",
+    href: "/outsourced-financial-operations",
     name: "Outsourced finance team",
     category: "operations",
     summary: "Your day-to-day finance function, run by us — without adding to headcount.",
@@ -42,7 +65,7 @@ export const services: Service[] = [
     metaTitle: "Outsourced Finance Team & Financial Operations",
     metaDescription:
       "Extend your finance team without hiring. Reckonwell runs bookkeeping, accounts payable, credit control, payroll and monthly management accounts for established UK companies.",
-    calculator: "finance-team",
+    tool: { kind: "calculator", key: "finance-team" },
     calculatorTitle: "What would it cost to hire instead?",
     calculatorIntro:
       "Choose the work you need covered. We'll show our indicative monthly fee next to the cost of employing people to do it.",
@@ -82,10 +105,11 @@ export const services: Service[] = [
         answer: "No. We work on a rolling monthly basis and you can cancel at any time.",
       },
     ],
-    related: ["bookkeeping-services", "payroll-services", "vat-returns", "annual-accounts-ct600"],
+    related: ["accounts-payable", "credit-control", "management-accounts", "bookkeeping-services"],
   },
   {
     slug: "bookkeeping-services",
+    href: "/bookkeeping-services",
     name: "Bookkeeping",
     category: "operations",
     summary: "Accurate, up-to-date books with every account reconciled.",
@@ -95,7 +119,7 @@ export const services: Service[] = [
     metaTitle: "Outsourced Bookkeeping Services for Growing Businesses",
     metaDescription:
       "Outsourced bookkeeping for UK businesses: transactions coded, bank accounts reconciled and records kept up to date in Xero or QuickBooks. Get an instant estimate.",
-    calculator: "bookkeeping",
+    tool: { kind: "calculator", key: "bookkeeping" },
     calculatorTitle: "Estimate your bookkeeping fee",
     calculatorIntro:
       "Bookkeeping is priced on the number of transactions you have each month. If your books are behind, we can bring them up to date first.",
@@ -131,10 +155,11 @@ export const services: Service[] = [
           "Not usually. We work in Xero and QuickBooks. If you're on spreadsheets or older desktop software, we'll recommend the simplest route and can set it up for you.",
       },
     ],
-    related: ["outsourced-financial-operations", "vat-returns", "payroll-services", "annual-accounts-ct600"],
+    related: ["accounts-payable", "month-end-close", "accounting-systems", "vat-returns"],
   },
   {
     slug: "payroll-services",
+    href: "/payroll-services",
     name: "Payroll",
     category: "compliance",
     summary: "Accurate monthly payroll, payslips, RTI and pensions.",
@@ -144,7 +169,7 @@ export const services: Service[] = [
     metaTitle: "Outsourced Payroll Services",
     metaDescription:
       "Outsourced payroll for UK businesses: monthly payroll, payslips, RTI submissions, pension auto-enrolment, starters and leavers. Get an instant estimate.",
-    calculator: "payroll",
+    tool: { kind: "calculator", key: "payroll" },
     calculatorTitle: "Estimate your payroll fee",
     calculatorIntro: "Payroll is £4 per employee per month, from £25 a month.",
     includes: [
@@ -177,6 +202,7 @@ export const services: Service[] = [
   },
   {
     slug: "vat-returns",
+    href: "/vat-returns",
     name: "VAT returns",
     category: "compliance",
     summary: "VAT returns prepared, checked and filed under Making Tax Digital.",
@@ -186,7 +212,7 @@ export const services: Service[] = [
     metaTitle: "VAT Returns & VAT Registration Services",
     metaDescription:
       "VAT returns prepared, reviewed and filed with HMRC under Making Tax Digital, plus help with VAT registration. Get an instant estimate.",
-    calculator: "vat",
+    tool: { kind: "calculator", key: "vat" },
     calculatorTitle: "Estimate your VAT fee",
     calculatorIntro: "VAT returns are priced per return. Most businesses file four a year.",
     includes: [
@@ -222,6 +248,7 @@ export const services: Service[] = [
   },
   {
     slug: "annual-accounts-ct600",
+    href: "/annual-accounts-ct600",
     name: "Annual accounts & CT600",
     category: "compliance",
     summary: "Statutory accounts and Corporation Tax returns, filed on time.",
@@ -231,7 +258,7 @@ export const services: Service[] = [
     metaTitle: "Annual Accounts & CT600 Corporation Tax Returns",
     metaDescription:
       "Statutory year-end accounts and CT600 Corporation Tax returns for UK limited companies, prepared and filed on time. Get an instant estimate.",
-    calculator: "annual-accounts",
+    tool: { kind: "calculator", key: "annual-accounts" },
     calculatorTitle: "Estimate your monthly fee",
     calculatorIntro:
       "The fee depends on your profit, your headcount and how closely you'd like us to keep an eye on your position during the year.",
@@ -275,6 +302,7 @@ export const services: Service[] = [
   },
   {
     slug: "self-assessment",
+    href: "/self-assessment",
     name: "Self Assessment",
     category: "compliance",
     summary: "Personal tax returns for directors, sole traders and landlords.",
@@ -284,7 +312,7 @@ export const services: Service[] = [
     metaTitle: "Self Assessment Tax Returns",
     metaDescription:
       "Self Assessment tax returns for directors, sole traders, freelancers and landlords, with optional monthly monitoring and MTD support. Get an instant estimate.",
-    calculator: "self-assessment",
+    tool: { kind: "calculator", key: "self-assessment" },
     calculatorTitle: "Estimate your Self Assessment fee",
     calculatorIntro:
       "The price depends on your income, whether you have rental income and how closely you'd like us to monitor your position.",
@@ -316,6 +344,7 @@ export const services: Service[] = [
   },
   {
     slug: "making-tax-digital",
+    href: "/making-tax-digital",
     name: "Making Tax Digital",
     category: "compliance",
     summary: "Quarterly MTD for Income Tax updates for sole traders and landlords.",
@@ -325,7 +354,7 @@ export const services: Service[] = [
     metaTitle: "Making Tax Digital for Income Tax (MTD ITSA)",
     metaDescription:
       "Making Tax Digital for Income Tax support for sole traders and landlords: digital records, quarterly updates and the final declaration. Get an instant estimate.",
-    calculator: "mtd",
+    tool: { kind: "calculator", key: "mtd" },
     calculatorTitle: "Estimate your MTD fee",
     calculatorIntro: "Choose how much support you'd like. Landlords with several properties pay a little more.",
     includes: [
@@ -356,6 +385,7 @@ export const services: Service[] = [
   },
   {
     slug: "r-and-d-tax-relief",
+    href: "/r-and-d-tax-relief",
     name: "R&D tax relief",
     category: "compliance",
     summary: "R&D tax relief claims prepared to stand up to HMRC scrutiny.",
@@ -365,7 +395,7 @@ export const services: Service[] = [
     metaTitle: "R&D Tax Relief Claims",
     metaDescription:
       "R&D tax relief claims for UK companies: qualifying spend identified, technical narrative written and claim filed with HMRC. Get an instant fee estimate.",
-    calculator: "rd-fee",
+    tool: { kind: "calculator", key: "rd-fee" },
     calculatorTitle: "Estimate the fee for your claim",
     calculatorIntro:
       "Claims are priced on your annual R&D spend. Companies with ongoing R&D can choose a monthly retainer instead.",
@@ -407,4 +437,32 @@ export const services: Service[] = [
   },
 ];
 
+/** Display order: financial operations, then compliance, then business support. */
+const order = [
+  "outsourced-financial-operations",
+  "bookkeeping-services",
+  "accounts-payable",
+  "credit-control",
+  "management-accounts",
+  "month-end-close",
+  "payroll-services",
+  "vat-returns",
+  "annual-accounts-ct600",
+  "self-assessment",
+  "making-tax-digital",
+  "r-and-d-tax-relief",
+  "accounting-systems",
+  "group-companies",
+];
+
+export const services: Service[] = [...coreServices, ...operationsServices].sort(
+  (a, b) => order.indexOf(a.slug) - order.indexOf(b.slug),
+);
+
 export const serviceBySlug = (slug: string) => services.find((s) => s.slug === slug);
+
+export const serviceGroups = [
+  { key: "operations", title: "Financial operations", text: "Ongoing monthly work that keeps your finance function running." },
+  { key: "compliance", title: "Accounting & compliance", text: "Returns and filings, on their own or alongside ongoing support." },
+  { key: "support", title: "Business support", text: "Help with systems, group structures and getting started." },
+] as const;

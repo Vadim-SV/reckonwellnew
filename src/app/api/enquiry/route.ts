@@ -5,6 +5,7 @@ import { internalRecipient, sendEmail } from "@/lib/email/send";
 import { enquirySchema, fieldErrors } from "@/lib/forms/schemas";
 import { clientIp, rateLimited } from "@/lib/forms/rate-limit";
 import { safeEstimate, type Estimate } from "@/lib/pricing/registry";
+import { safeScope, type ScopeSummary } from "@/lib/scoping/registry";
 
 export async function POST(request: Request) {
   if (rateLimited(`enquiry:${clientIp(request.headers)}`)) {
@@ -28,18 +29,26 @@ export async function POST(request: Request) {
   if (website) return NextResponse.json({ ok: true });
 
   // Never trust a price from the browser — recalculate from the inputs.
+  // Scoping tools (services without approved pricing) are validated the same way.
   let estimate: Estimate | undefined;
+  let scope: ScopeSummary | undefined;
   let calculatorInputs: unknown;
   if (calculator) {
     const result = safeEstimate(calculator.key, calculator.inputs);
     if (result.ok) {
       estimate = result.estimate;
       calculatorInputs = result.inputs;
+    } else {
+      const scoped = safeScope(calculator.key, calculator.inputs);
+      if (scoped.ok) {
+        scope = scoped.summary;
+        calculatorInputs = scoped.inputs;
+      }
     }
   }
 
   const sourceLabel = labelForSource(source);
-  const internal = enquiryInternalEmail({ contact, sourceLabel, estimate, calculatorInputs });
+  const internal = enquiryInternalEmail({ contact, sourceLabel, estimate, scope, calculatorInputs });
   const sent = await sendEmail({
     to: { email: internalRecipient(), name: "Reckonwell" },
     subject: internal.subject,
@@ -54,7 +63,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const ack = enquiryAcknowledgementEmail({ contact, sourceLabel, estimate });
+  const ack = enquiryAcknowledgementEmail({ contact, sourceLabel, estimate, scope });
   const ackSent = await sendEmail({ to: { email: contact.email, name: contact.name }, subject: ack.subject, html: ack.html });
   if (!ackSent.ok) console.error("[enquiry] acknowledgement failed:", ackSent.reason);
 

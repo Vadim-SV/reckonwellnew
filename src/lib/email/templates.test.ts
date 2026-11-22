@@ -50,3 +50,22 @@ describe("email templates", () => {
     expect(html).not.toContain("<b>Ann</b>");
   });
 });
+
+describe("scoping summaries in emails", () => {
+  it("includes the requirements summary and no price", async () => {
+    const { safeScope } = await import("@/lib/scoping/registry");
+    const r = safeScope("credit-control", {
+      invoicesPerMonth: "200-500",
+      terms: "30",
+      overdue: "a-lot",
+      chasing: "nobody",
+      phoneFollowUp: true,
+      software: "quickbooks",
+    });
+    if (!r.ok) throw new Error("scope failed");
+    const { html } = enquiryAcknowledgementEmail({ contact, sourceLabel: "Credit control", scope: r.summary });
+    expect(html).toContain("tailored quote");
+    expect(html).toContain("Polite reminders by email, followed up by phone");
+    expect(html).not.toMatch(/£\d/);
+  });
+});

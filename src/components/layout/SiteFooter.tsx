@@ -25,8 +25,8 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 export function SiteFooter() {
   return (
     <footer className="bg-ink text-[#b8b8b8]">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-5 lg:px-8">
-        <div className="lg:col-span-2">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-3 lg:grid-cols-6 lg:px-8">
+        <div className="md:col-span-3 lg:col-span-2">
           <Image
             src="/brand/reckonwell-logo-white.png"
             alt="Reckonwell"
@@ -50,8 +50,11 @@ export function SiteFooter() {
             </a>
           </address>
         </div>
-        <FooterColumn title="Services" links={footerNav.services} />
-        <FooterColumn title="Industries" links={footerNav.industries} />
+        <FooterColumn title="Financial operations" links={footerNav.operations} />
+        <FooterColumn title="Accounting & compliance" links={footerNav.compliance} />
+        <div className="space-y-10">
+          <FooterColumn title="Industries" links={footerNav.industries} />
+        </div>
         <FooterColumn title="Get started" links={footerNav.company} />
       </div>
       <div className="border-t border-white/10">

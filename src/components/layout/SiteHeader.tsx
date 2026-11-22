@@ -56,7 +56,40 @@ function Dropdown({ item, active }: { item: NavItem; active: boolean }) {
         {item.label}
         <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} aria-hidden />
       </button>
-      {open && (
+      {open && item.groups && (
+        <div className="absolute top-full left-1/2 z-50 w-[54rem] max-w-[calc(100vw-2rem)] -translate-x-1/2 pt-3">
+          <div className="rounded-panel border border-hairline bg-cream p-5 shadow-float">
+            <div className="grid grid-cols-3 gap-6">
+              {item.groups.map((g) => (
+                <div key={g.title}>
+                  <p className="px-3 text-[11px] font-medium uppercase tracking-[0.16em] text-muted">{g.title}</p>
+                  <ul className="mt-2 space-y-0.5">
+                    {g.links.map((c) => (
+                      <li key={c.href}>
+                        <Link
+                          href={c.href}
+                          onClick={() => setOpen(false)}
+                          className="block rounded-card px-3 py-2 text-[15px] text-ink transition-colors hover:bg-sand"
+                        >
+                          {c.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <Link
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="mt-3 block border-t border-hairline px-3 pt-3 pb-1 text-sm text-steel hover:underline"
+            >
+              View all {item.label.toLowerCase()} →
+            </Link>
+          </div>
+        </div>
+      )}
+      {open && item.children && (
         <div className="absolute top-full left-1/2 z-50 w-[36rem] -translate-x-1/2 pt-3">
           <div className="rounded-panel border border-hairline bg-cream p-3 shadow-float">
             <ul className="grid grid-cols-2 gap-1">
@@ -116,7 +149,8 @@ export function SiteHeader() {
   const isActive = (item: NavItem) =>
     pathname === item.href ||
     pathname.startsWith(`${item.href}/`) ||
-    Boolean(item.children?.some((c) => pathname === c.href));
+    Boolean(item.children?.some((c) => pathname === c.href)) ||
+    Boolean(item.groups?.some((g) => g.links.some((c) => pathname === c.href)));
 
   return (
     <header
@@ -139,7 +173,7 @@ export function SiteHeader() {
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-7">
             {primaryNav.map((item) =>
-              item.children ? (
+              item.children || item.groups ? (
                 <Dropdown key={item.href} item={item} active={isActive(item)} />
               ) : (
                 <li key={item.href}>
@@ -185,6 +219,20 @@ export function SiteHeader() {
                 <Link href={item.href} className="block font-display text-2xl text-ink">
                   {item.label}
                 </Link>
+                {item.groups?.map((g) => (
+                  <div key={g.title} className="mt-4">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">{g.title}</p>
+                    <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-2">
+                      {g.links.map((c) => (
+                        <li key={c.href}>
+                          <Link href={c.href} className="text-[15px] text-body">
+                            {c.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
                 {item.children && (
                   <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2">
                     {item.children.map((c) => (

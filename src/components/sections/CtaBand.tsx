@@ -18,8 +18,8 @@ export function CtaBand({
           <p className="mt-4 text-lg text-cream/75">{text}</p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/contact" variant="light" size="lg">
-            Get in touch
+          <ButtonLink href="/book" variant="light" size="lg">
+            Book a discovery call
           </ButtonLink>
           <ButtonLink href={site.phoneHref} size="lg" className="border border-cream/30 bg-transparent hover:bg-cream/10">
             Call {site.phone}

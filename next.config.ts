@@ -25,9 +25,12 @@ const nextConfig: NextConfig = {
       ["/fractional-finance-department", "/outsourced-financial-operations"],
       ["/london-payroll-services", "/payroll-services"],
       ["/referrals", "/partners"],
-      ["/book", "/contact"],
     ];
-    return map.map(([source, destination]) => ({ source, destination, permanent: true }));
+    return [
+      ...map.map(([source, destination]) => ({ source, destination, permanent: true })),
+      // Temporary (307, not cached) until the real booking page is built in Stage 06.
+      { source: "/book", destination: "/contact", permanent: false },
+    ];
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
