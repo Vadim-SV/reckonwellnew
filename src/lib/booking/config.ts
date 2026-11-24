@@ -5,7 +5,7 @@
  * Confirmed by Reckonwell (22 Nov 2026): Google Calendar for live booking;
  * calls start between 09:30 and 16:30 (the last call runs 16:30–17:00);
  * 30-minute calls; 24 hours' minimum notice; 15-minute buffer around
- * existing events. Still a default: bookings up to 3 weeks ahead.
+ * existing events; bookings up to 3 weeks ahead.
  * These values are locked by src/lib/booking/config.test.ts.
  */
 export const BOOKING = {

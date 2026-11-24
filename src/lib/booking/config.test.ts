@@ -11,5 +11,6 @@ describe("confirmed booking rules", () => {
     expect(BOOKING.durationMinutes).toBe(30);
     expect(BOOKING.minNoticeHours).toBe(24);
     expect(BOOKING.bufferMinutes).toBe(15);
+    expect(BOOKING.horizonDays).toBe(21);
   });
 });
