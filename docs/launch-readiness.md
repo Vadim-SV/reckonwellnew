@@ -82,7 +82,7 @@ The temporary `/book` redirect has been removed now that `/book` is a real page.
 - `BOOKING_LOCATION` sets a fixed location or Teams link, used when no Meet link is created.
 
 ### Rules (`src/lib/booking/config.ts`)
-Monday–Friday, starts 09:30–16:30 UK time (**confirmed**). Still defaults, awaiting confirmation: 30-minute calls, a 15-minute buffer around existing events, 24 hours' minimum notice, three weeks ahead. England & Wales bank holidays (2026–2027) are excluded and need adding each year.
+All **confirmed**: Monday–Friday, starts 09:30–16:30 UK time, 30-minute calls, 24 hours' minimum notice, and a 15-minute buffer around existing events. Still a default: bookings up to three weeks ahead. England & Wales bank holidays (2026–2027) are excluded and need adding each year.
 
 **How double bookings are prevented:**
 1. Availability excludes busy calendar time and bookings in progress.
@@ -144,7 +144,7 @@ Ten items, nine open; payroll is resolved. See [`pricing-conflicts-report.md`](.
 | 2 | Authenticate reckonwell.com in Brevo (DNS at IONOS) | Reckonwell | ☐ |
 | 3 | Create a Postgres database and set `DATABASE_URL` | Reckonwell / dev | ☐ |
 | 4 | Google Calendar chosen ✅ — create the OAuth client, run `npm run calendar:auth`, set the four variables, run `calendar:check --write` | Reckonwell | ◐ |
-| 5 | Booking hours 09:30–16:30 ✅ — still to confirm: call length, notice period and buffer | Reckonwell | ◐ |
+| 5 | Booking rules ✅ — 09:30–16:30, 30-minute calls, 24h notice, 15-minute buffer (booking window of 3 weeks is a default) | Reckonwell | ☑ |
 | 6 | Resolve the pricing conflicts (report) and VAT wording | Reckonwell | ☐ |
 | 7 | Approve privacy policy changes (fix the "[X years]" placeholder) | Reckonwell + adviser | ☐ |
 | 8 | Confirm trust logo classifications (certification / membership / partner) | Reckonwell | ☐ |
