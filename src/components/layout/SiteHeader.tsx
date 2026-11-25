@@ -49,7 +49,7 @@ function Dropdown({ item, active }: { item: NavItem; active: boolean }) {
           setOpen((v) => !v);
         }}
         className={cn(
-          "flex items-center gap-1 whitespace-nowrap py-2 text-[14px] tracking-wide text-body transition-colors hover:text-navy",
+          "flex min-h-10 items-center gap-1 whitespace-nowrap text-[14px] tracking-wide text-body transition-colors hover:text-navy",
           active && "text-navy",
         )}
       >
@@ -62,7 +62,7 @@ function Dropdown({ item, active }: { item: NavItem; active: boolean }) {
             <div className="grid grid-cols-3 gap-6">
               {item.groups.map((g) => (
                 <div key={g.title}>
-                  <p className="px-3 text-[11px] font-medium uppercase tracking-[0.16em] text-muted">{g.title}</p>
+                  <p className="px-3 text-xs font-medium uppercase tracking-[0.16em] text-muted">{g.title}</p>
                   <ul className="mt-2 space-y-0.5">
                     {g.links.map((c) => (
                       <li key={c.href}>
@@ -101,7 +101,9 @@ function Dropdown({ item, active }: { item: NavItem; active: boolean }) {
                     className="block rounded-card px-4 py-3 transition-colors hover:bg-sand"
                   >
                     <span className="block text-[15px] font-medium text-ink">{c.label}</span>
-                    {c.description && <span className="mt-0.5 block text-[13px] leading-snug text-muted">{c.description}</span>}
+                    {c.description && (
+                      <span className="mt-0.5 block text-[13px] leading-snug text-muted">{c.description}</span>
+                    )}
                   </Link>
                 </li>
               ))}
@@ -166,8 +168,15 @@ export function SiteHeader() {
         Skip to content
       </a>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:h-20 lg:px-8">
-        <Link href="/" aria-label="Reckonwell home" className="shrink-0">
-          <Image src="/brand/reckonwell-logo-black.png" alt="Reckonwell" width={2000} height={270} priority className="h-6 w-auto lg:h-7" />
+        <Link href="/" aria-label="Reckonwell home" className="flex min-h-11 shrink-0 items-center">
+          <Image
+            src="/brand/reckonwell-logo-black.png"
+            alt="Reckonwell"
+            width={2000}
+            height={270}
+            priority
+            className="h-5 w-auto min-[380px]:h-6 lg:h-7"
+          />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
@@ -181,7 +190,7 @@ export function SiteHeader() {
                     href={item.href}
                     aria-current={isActive(item) ? "page" : undefined}
                     className={cn(
-                      "whitespace-nowrap text-[14px] tracking-wide text-body transition-colors hover:text-navy",
+                      "inline-flex min-h-10 items-center whitespace-nowrap text-[14px] tracking-wide text-body transition-colors hover:text-navy",
                       isActive(item) && "text-navy underline underline-offset-8",
                     )}
                   >
@@ -199,16 +208,24 @@ export function SiteHeader() {
           </ButtonLink>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex size-11 items-center justify-center text-navy lg:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X aria-hidden /> : <Menu aria-hidden />}
-        </button>
+        <div className="ml-auto flex items-center gap-1 lg:hidden">
+          <Link
+            href={ctaNav.book.href}
+            className="hidden min-h-10 items-center rounded-xs bg-navy px-3 text-xs font-medium tracking-wide text-cream min-[360px]:inline-flex"
+          >
+            Book a call
+          </Link>
+          <button
+            type="button"
+            className="inline-flex size-11 items-center justify-center text-navy lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X aria-hidden /> : <Menu aria-hidden />}
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -221,7 +238,7 @@ export function SiteHeader() {
                 </Link>
                 {item.groups?.map((g) => (
                   <div key={g.title} className="mt-4">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">{g.title}</p>
+                    <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">{g.title}</p>
                     <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-2">
                       {g.links.map((c) => (
                         <li key={c.href}>

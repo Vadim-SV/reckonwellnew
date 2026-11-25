@@ -15,7 +15,7 @@ export default function NotFound() {
         <p className="mt-6 text-lg">
           It may have moved. Try one of these instead.
         </p>
-        <div className="mt-10 flex justify-center gap-3">
+        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
           <ButtonLink href="/">Back to the homepage</ButtonLink>
           <ButtonLink href="/services" variant="secondary">
             Our services

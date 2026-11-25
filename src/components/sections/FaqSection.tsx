@@ -18,12 +18,12 @@ export function FaqSection({ faqs, title = "Questions we're often asked" }: { fa
         </div>
         <div className="divide-y divide-[var(--border)] border-y border-hairline">
           {faqs.map((f) => (
-            <details key={f.question} className="group py-5">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 font-display text-xl text-ink [&::-webkit-details-marker]:hidden">
+            <details key={f.question} className="group">
+              <summary className="flex min-h-11 cursor-pointer list-none items-start justify-between gap-6 py-5 font-display text-xl text-ink [&::-webkit-details-marker]:hidden">
                 {f.question}
                 <Plus className="mt-1 size-5 shrink-0 text-navy transition-transform group-open:rotate-45" aria-hidden />
               </summary>
-              <p className="mt-4 max-w-3xl leading-relaxed">{f.answer}</p>
+              <p className="max-w-3xl pb-6 leading-relaxed">{f.answer}</p>
             </details>
           ))}
         </div>

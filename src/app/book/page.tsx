@@ -36,7 +36,7 @@ export default function BookPage() {
           </div>
           <aside className="space-y-6">
             <div className="rounded-panel bg-navy p-7 text-cream">
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">What to expect</p>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-cream/60">What to expect</p>
               <ul className="mt-5 space-y-3.5">
                 {expect.map((e) => (
                   <li key={e} className="flex gap-3 leading-relaxed">

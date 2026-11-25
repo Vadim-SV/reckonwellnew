@@ -78,7 +78,7 @@ export default function PartnersPage() {
         primary={{ label: "Become a partner", href: "#partner-form" }}
         aside={
           <div className="rounded-panel bg-navy p-8 text-cream shadow-float">
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">Referral commission</p>
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-cream/60">Referral commission</p>
             <p className="mt-4 font-display text-7xl leading-none">10%</p>
             <p className="mt-4 text-lg text-cream/80">
               of the net monthly fee, for as long as the client stays with us. Paid monthly.

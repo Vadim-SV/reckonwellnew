@@ -6,13 +6,13 @@ import { site } from "@/lib/site";
 function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <h2 className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-[#b8b8b8]">
+      <h2 className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-[#b8b8b8]">
         {title}
       </h2>
-      <ul className="mt-4 space-y-2.5">
+      <ul className="mt-3">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-sm text-white/80 transition-colors hover:text-rose">
+            <Link href={l.href} className="inline-flex min-h-10 items-center text-sm text-white/80 transition-colors hover:text-rose">
               {l.label}
             </Link>
           </li>
@@ -25,8 +25,8 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 export function SiteFooter() {
   return (
     <footer className="bg-ink text-[#b8b8b8]">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-3 lg:grid-cols-6 lg:px-8">
-        <div className="md:col-span-3 lg:col-span-2">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-3 md:gap-12 lg:grid-cols-6 lg:px-8">
+        <div className="col-span-2 md:col-span-3 lg:col-span-2">
           <Image
             src="/brand/reckonwell-logo-white.png"
             alt="Reckonwell"
@@ -41,11 +41,11 @@ export function SiteFooter() {
           <address className="mt-6 text-sm not-italic leading-relaxed">
             {site.address.street}, {site.address.locality} {site.address.postcode}
             <br />
-            <a href={site.phoneHref} className="hover:text-rose">
+            <a href={site.phoneHref} className="inline-flex min-h-10 items-center hover:text-rose">
               {site.phone}
             </a>
             {" · "}
-            <a href={`mailto:${site.email}`} className="hover:text-rose">
+            <a href={`mailto:${site.email}`} className="inline-flex min-h-10 items-center break-all hover:text-rose">
               {site.email}
             </a>
           </address>
@@ -66,7 +66,7 @@ export function SiteFooter() {
           <ul className="flex gap-6">
             {footerNav.legal.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="uppercase tracking-widest hover:text-rose">
+                <Link href={l.href} className="inline-flex min-h-10 items-center uppercase tracking-widest hover:text-rose">
                   {l.label}
                 </Link>
               </li>

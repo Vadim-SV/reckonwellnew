@@ -85,7 +85,7 @@ export function EnquiryForm({ source, calculator, submitLabel = "Send enquiry", 
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="relative grid gap-5 sm:grid-cols-2">
+    <form onSubmit={onSubmit} noValidate className="relative grid grid-cols-1 gap-5 sm:grid-cols-2">
       <TextField label="Your name" name="name" autoComplete="name" value={values.name} onChange={update("name")} error={errors.name} />
       <TextField
         label="Email address"

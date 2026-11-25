@@ -23,7 +23,7 @@ export function LinkCard({
         className,
       )}
     >
-      {meta && <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">{meta}</span>}
+      {meta && <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted">{meta}</span>}
       <span className="mt-2 flex items-start justify-between gap-4">
         <span className="font-display text-2xl text-ink">{title}</span>
         <ArrowUpRight className="mt-1 size-5 shrink-0 text-navy transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />

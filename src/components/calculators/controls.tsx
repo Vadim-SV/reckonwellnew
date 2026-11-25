@@ -133,8 +133,8 @@ export function Toggle({
 }) {
   const id = useId();
   return (
-    <div className="flex items-start justify-between gap-4 border-b border-hairline py-3 last:border-b-0">
-      <label htmlFor={id} className="cursor-pointer">
+    <div className="flex items-center justify-between gap-4 border-b border-hairline py-1.5 last:border-b-0">
+      <label htmlFor={id} className="min-w-0 cursor-pointer py-1.5">
         <span className="block text-[15px] text-ink">{label}</span>
         {hint && <span className="mt-0.5 block text-sm text-muted">{hint}</span>}
       </label>
@@ -144,17 +144,17 @@ export function Toggle({
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={cn(
-          "relative mt-0.5 h-6 w-11 shrink-0 rounded-full transition-colors",
-          checked ? "bg-navy" : "bg-oat",
-        )}
+        className="-mr-1 flex size-12 shrink-0 items-center justify-center rounded-full"
       >
-        <span
-          className={cn(
-            "absolute top-0.5 left-0.5 size-5 rounded-full bg-white shadow transition-transform",
-            checked && "translate-x-5",
-          )}
-        />
+        {/* 48px tap area around a 44×24 switch */}
+        <span className={cn("relative h-6 w-11 rounded-full transition-colors", checked ? "bg-navy" : "bg-oat")}>
+          <span
+            className={cn(
+              "absolute top-0.5 left-0.5 size-5 rounded-full bg-white shadow transition-transform",
+              checked && "translate-x-5",
+            )}
+          />
+        </span>
       </button>
     </div>
   );
@@ -265,8 +265,8 @@ export function RangeField({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-4 h-2 w-full cursor-pointer appearance-none rounded-full accent-navy"
-        style={{ background: `linear-gradient(to right, var(--color-navy) ${pct}%, var(--color-oat) ${pct}%)` }}
+        className="range mt-1"
+        style={{ ["--fill" as string]: `${pct}%` }}
       />
       <div className="mt-1 flex justify-between text-xs text-muted">
         <span>{format(min)}</span>
@@ -302,7 +302,7 @@ export function CheckboxGroup<T extends string>({
             <label
               key={o.value}
               className={cn(
-                "cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors",
+                "inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 py-2 text-sm transition-colors",
                 checked ? "border-navy bg-navy text-cream" : "border-hairline bg-white text-ink hover:border-navy/40",
               )}
             >

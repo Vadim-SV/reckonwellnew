@@ -26,13 +26,13 @@ export function ContactSection({
           <ul className="mt-10 space-y-4 text-[15px]">
             <li className="flex items-center gap-3">
               <Phone className="size-4 text-navy" aria-hidden />
-              <a href={site.phoneHref} className="hover:underline">
+              <a href={site.phoneHref} className="inline-flex min-h-10 items-center hover:underline">
                 {site.phone}
               </a>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="size-4 text-navy" aria-hidden />
-              <a href={`mailto:${site.email}`} className="hover:underline">
+              <a href={`mailto:${site.email}`} className="inline-flex min-h-10 items-center break-all hover:underline">
                 {site.email}
               </a>
             </li>

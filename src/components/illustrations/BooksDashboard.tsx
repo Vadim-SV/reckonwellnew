@@ -141,7 +141,7 @@ export function BooksDashboard() {
         <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-[1.35fr_1fr]">
           <div>
             <p className="mb-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-muted">Incoming</p>
-            <div className="relative h-[10.6rem] space-y-1.5 overflow-hidden">
+            <div className="relative h-[7.1rem] space-y-1.5 overflow-hidden sm:h-[10.6rem]">
               <AnimatePresence initial={false} mode="popLayout">
                 {visibleFeed.map((item) => (
                   <motion.div
@@ -182,10 +182,13 @@ export function BooksDashboard() {
       {/* Front-left: customers owing */}
       <motion.div
         style={{ y: yFrontA }}
-        className="absolute bottom-[3%] left-0 w-[52%] rounded-card border border-hairline bg-white p-4 shadow-float sm:w-[46%]"
+        className="absolute bottom-[3%] left-0 w-[48%] rounded-card border border-hairline bg-white p-3 shadow-float sm:w-[46%] sm:p-4"
       >
         <div className="flex items-center justify-between gap-2">
-          <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted">Customers owe</p>
+          <p className="whitespace-nowrap text-[10px] font-medium uppercase tracking-[0.1em] text-muted">
+            <span className="sm:hidden">Owed to you</span>
+            <span className="hidden sm:inline">Customers owe</span>
+          </p>
           <span
             className={cn(
               "rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors duration-500",
@@ -209,19 +212,24 @@ export function BooksDashboard() {
       {/* Front-right: management report */}
       <motion.div
         style={{ y: yFrontB }}
-        className="absolute right-0 bottom-0 w-[46%] rounded-card bg-navy p-4 text-cream shadow-float sm:w-[44%]"
+        className="absolute right-0 bottom-0 w-[49%] rounded-card bg-navy p-3 text-cream shadow-float sm:w-[44%] sm:p-4"
       >
         <div className="flex items-center justify-between gap-2">
-          <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-cream/60">Management report</p>
+          <p className="whitespace-nowrap text-[10px] font-medium uppercase tracking-[0.1em] text-cream/60">
+            <span className="sm:hidden">Report</span>
+            <span className="hidden sm:inline">Management report</span>
+          </p>
           <AnimatePresence>
             {closed && (
               <motion.span
                 initial={reduce ? false : { opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex items-center gap-1 rounded-full bg-positive px-2 py-0.5 text-[10px] font-medium text-white"
+                className="flex items-center gap-1 whitespace-nowrap rounded-full bg-positive px-2 py-0.5 text-[10px] font-medium text-white"
               >
-                <Check className="size-3" strokeWidth={3} aria-hidden /> March closed
+                <Check className="size-3" strokeWidth={3} aria-hidden />
+                <span className="sm:hidden">Closed</span>
+                <span className="hidden sm:inline">March closed</span>
               </motion.span>
             )}
           </AnimatePresence>

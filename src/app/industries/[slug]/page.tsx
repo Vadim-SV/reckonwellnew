@@ -68,7 +68,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               ))}
             </div>
             <Reveal delay={0.1} className="rounded-panel bg-navy p-7 text-cream shadow-float">
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">What we handle for you</p>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-cream/60">What we handle for you</p>
               <ul className="mt-5 space-y-3.5">
                 {ind.weHandle.map((w) => (
                   <li key={w} className="flex gap-3 leading-relaxed">

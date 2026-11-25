@@ -10,8 +10,8 @@ const variants = {
 
 const sizes = {
   sm: "min-h-10 px-4 text-xs",
-  md: "min-h-12 px-6 text-sm",
-  lg: "min-h-14 px-8 text-sm",
+  md: "min-h-12 px-6 py-2.5 text-sm",
+  lg: "min-h-14 px-6 py-3 text-sm sm:px-8",
 } as const;
 
 type Common = {
@@ -22,7 +22,7 @@ type Common = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xs font-medium tracking-wide transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 text-center leading-snug whitespace-normal sm:whitespace-nowrap rounded-xs font-medium tracking-wide transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50";
 
 export function ButtonLink({
   href,

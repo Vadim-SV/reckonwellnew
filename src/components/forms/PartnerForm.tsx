@@ -62,7 +62,7 @@ export function PartnerForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="relative grid gap-5 sm:grid-cols-2">
+    <form onSubmit={onSubmit} noValidate className="relative grid grid-cols-1 gap-5 sm:grid-cols-2">
       <TextField label="First name" autoComplete="given-name" value={values.firstName} onChange={update("firstName")} error={errors.firstName} />
       <TextField label="Last name" autoComplete="family-name" value={values.lastName} onChange={update("lastName")} error={errors.lastName} />
       <TextField label="Email address" type="email" autoComplete="email" value={values.email} onChange={update("email")} error={errors.email} />

@@ -51,7 +51,7 @@ export function EstimatePanel({ estimate, className }: { estimate: Estimate; cla
   return (
     <div className={cn("overflow-hidden rounded-panel bg-navy text-cream shadow-float", className)}>
       <div className="p-6 sm:p-8" aria-live="polite">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">Your indicative estimate</p>
+        <p className="text-xs font-medium uppercase tracking-[0.18em] text-cream/60">Your indicative estimate</p>
         {empty ? (
           <p className="mt-4 font-display text-2xl text-cream/80">Choose your options to see a price.</p>
         ) : (
@@ -101,7 +101,7 @@ export function EstimatePanel({ estimate, className }: { estimate: Estimate; cla
 
       {comparison && (
         <div className="border-t border-cream/10 px-6 py-5 sm:px-8">
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">Compared with hiring</p>
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-cream/60">Compared with hiring</p>
           <dl className="mt-3 grid grid-cols-2 gap-4 text-sm">
             <div>
               <dt className="text-cream/60">Employing people</dt>

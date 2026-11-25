@@ -17,7 +17,7 @@ import { PageHero } from "./PageHero";
 function GoodFitCard({ items }: { items: string[] }) {
   return (
     <div className="rounded-panel border border-hairline bg-white/70 p-7 shadow-card">
-      <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">A good fit if</p>
+      <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted">A good fit if</p>
       <ul className="mt-5 space-y-4">
         {items.map((g) => (
           <li key={g} className="flex gap-3 leading-relaxed text-ink">
@@ -72,7 +72,7 @@ export function ServicePage({ service }: { service: Service }) {
         <Section tone="cream" className="pt-0 sm:pt-0">
           <Container>
             <Reveal className="rounded-panel border border-hairline bg-white/70 p-7 shadow-card sm:p-9">
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">A good fit if</p>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted">A good fit if</p>
               <ul className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2">
                 {service.goodFit.map((g) => (
                   <li key={g} className="flex gap-3 leading-relaxed text-ink">

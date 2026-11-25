@@ -91,7 +91,7 @@ export default function StartupsPage() {
         secondary={{ label: "Book a discovery call", href: "/book" }}
         aside={
           <div className="rounded-panel bg-navy p-8 text-cream shadow-float">
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-cream/60">Founder&apos;s Launch Offer</p>
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-cream/60">Founder&apos;s Launch Offer</p>
             <p className="mt-4 font-display text-4xl leading-tight">Set up properly from day one.</p>
             <ul className="mt-6 space-y-3">
               {launchIncludes.slice(0, 4).map((i) => (

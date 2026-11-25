@@ -47,9 +47,9 @@ function DayChip({ date, selected, onClick }: { date: string; selected: boolean;
         selected ? "border-navy bg-navy text-cream" : "border-hairline bg-white text-ink hover:border-navy/40",
       )}
     >
-      <span className={cn("text-[11px] uppercase tracking-[0.12em]", selected ? "text-cream/70" : "text-muted")}>{l.weekday}</span>
+      <span className={cn("text-xs uppercase tracking-[0.12em]", selected ? "text-cream/70" : "text-muted")}>{l.weekday}</span>
       <span className="tabular font-display text-2xl leading-tight">{l.day}</span>
-      <span className={cn("text-[11px]", selected ? "text-cream/70" : "text-muted")}>{l.month}</span>
+      <span className={cn("text-xs", selected ? "text-cream/70" : "text-muted")}>{l.month}</span>
     </button>
   );
 }
@@ -282,7 +282,7 @@ export function BookingWidget() {
       )}
 
       {/* Step 3: details */}
-      <fieldset className="grid min-w-0 gap-5 sm:grid-cols-2">
+      <fieldset className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2">
         <legend className="mb-1 text-[15px] font-medium text-ink sm:col-span-2">3. Your details</legend>
         <TextField label="Your name" autoComplete="name" value={values.name} onChange={update("name")} error={errors.name} />
         <TextField label="Email address" type="email" autoComplete="email" value={values.email} onChange={update("email")} error={errors.email} />

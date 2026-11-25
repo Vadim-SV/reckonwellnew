@@ -17,7 +17,7 @@ export function CtaBand({
           <h2 className="text-4xl leading-tight sm:text-5xl">{title}</h2>
           <p className="mt-4 text-lg text-cream/75">{text}</p>
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <ButtonLink href="/book" variant="light" size="lg">
             Book a discovery call
           </ButtonLink>

@@ -4,7 +4,7 @@ import { useId } from "react";
 import { cn } from "@/lib/utils";
 
 const inputClass =
-  "mt-2 w-full rounded-xs border bg-white px-3.5 text-[15px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-navy";
+  "mt-2 w-full min-w-0 rounded-xs border bg-white px-3.5 text-[15px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-navy";
 
 type Common = { label: string; error?: string; optional?: boolean };
 
